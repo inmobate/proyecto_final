@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+
+:root {
+  --color1: #a33c7f;
+  --color2: #ba5497;
+  --color3: #d16db0;
+  --color4: #e885c8;
+  --color5: #ff9de0;
+  --black: #181818;
+}
+
+* {
+  /* outline: 1px solid red; */
+  box-sizing: 0;
+  margin: 0;
+  padding: 0;
+  font-family: "Averta-Bold", sans-serif;
+  text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d3d3d3;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
