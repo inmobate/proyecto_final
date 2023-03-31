@@ -146,8 +146,15 @@ const postProperty = async (req, res) => {
         room,
         title,
         pictures,
-        beds
+        beds,
+        type,
+        service
       });
+      const services = await Service.findAll({where:{name: service}});
+      const types = await Type.findOne({where:{name: type}});
+      newproperty.addService(services);
+      newproperty.setType(types);
+      
       res.status(201).json(newproperty);
     }
   } catch (error) {
