@@ -63,9 +63,8 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       beds: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: 2,
       },
     },
     {

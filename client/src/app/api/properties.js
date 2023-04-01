@@ -5,8 +5,8 @@ export const properties = createApi({
   reducerPath: "properties",
 
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3001",
-    //baseUrl: `${local}`,
+    //baseUrl: "http://localhost:3001",
+    baseUrl: `${local}`,
   }),
 
   endpoints: (builder) => ({

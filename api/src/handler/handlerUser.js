@@ -41,7 +41,6 @@ const allProperty = async (req, res) => {
   const { city, province, page, size, minPrice, maxPrice, type } = req.query;
 
   switch (true) {
-
     case type !== undefined:
       const filterType = datos.filter((el) => {
         return el.type === type;
@@ -75,10 +74,6 @@ const allProperty = async (req, res) => {
             model: Service,
             attributes: ["name", "icon"],
             through: { attributes: [] },
-          },
-          {
-            model: PropertyType,
-            attributes: ["name"],
           },
         ],
       });
@@ -172,13 +167,14 @@ const postProperty = async (req, res) => {
         pictures,
         beds,
         type,
-        service
       });
-      const services = await Service.findAll({where:{name: service}});
-      const types = await Type.findOne({where:{name: type}});
+
+      const services = await Service.findAll({ where: { name: service } });
+      const types = await Type.findOne({ where: { name: type } });
       newproperty.addService(services);
       newproperty.setType(types);
-      
+
+      console.log(newproperty);
       res.status(201).json(newproperty);
     }
   } catch (error) {
