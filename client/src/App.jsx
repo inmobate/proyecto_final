@@ -9,7 +9,6 @@ import Detail from "./pages/Detail";
 import Search from "./pages/Search";
 import FilterType from "./pages/FilterType";
 import Estadistica from "./pages/Estadistica";
-import Filter from "./pages/Filter";
 import FilterCombine from "./pages/FilterCombine";
 import Home from "./pages/Home";
 import Landing from "./pages/Landing";
