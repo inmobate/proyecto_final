@@ -47,14 +47,19 @@ const linksArray = [
     to: "/home",
   },
   {
-    label: "Usuarios",
+    label: "Estadisticas",
     icon: <ImStatsBars />,
-    to: "/home",
+    to: "/stats",
   },
   {
-    label: "Publicacion",
+    label: "General",
     icon: <AiOutlineForm />,
-    to: "/addproperty",
+    to: "/dashboard",
+  },
+  {
+    label: "Mis Publicaciones",
+    icon: <AiOutlineForm />,
+    to: "/mypublic",
   },
   {
     label: "Imformacion",
@@ -63,7 +68,7 @@ const linksArray = [
   }, {
     label: "Comentarios",
     icon: <AiFillHome />,
-    to: "/perfil",
+    to: "/comments",
   },
 ];
 
