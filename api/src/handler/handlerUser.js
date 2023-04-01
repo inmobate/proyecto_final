@@ -114,7 +114,6 @@ const allPropertyById = async (req, res) => {
           model: Service,
           through: { attributes: [] },
         },
-        },
       ],
     });
 
@@ -132,18 +131,9 @@ const postProperty = async (req, res) => {
     bathrooms, //
     room, //
     title, //
-    price, //
-    description, //
-    bathrooms, //
-    room, //
-    title, //
     city,
     province,
     address,
-    pictures, //
-    type, //
-    service, //
-    beds, //
     pictures, //
     type, //
     service, //
@@ -253,8 +243,6 @@ const allUsers = async (req, res) => {
 };
 
 const postUsers = async (req, res) => {
-  const { id, name, lastName, email } = req.body;
-  const usuario = await User.findOne({ where: { email: email } });
   const { id, name, lastName, email } = req.body;
   const usuario = await User.findOne({ where: { email: email } });
   try {

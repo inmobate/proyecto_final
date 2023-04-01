@@ -75,7 +75,7 @@ router.put("/:id/publication", putPublications);
 router.delete("/:id/publication", deletePublication);
 //--------------------------------------------------------------------------------//
 router.get("/admin/?get=", getAdmin);
-router.put("/admin/remove?=remove", deleteAdmin);
+router.put("/admin/remove?remove=", deleteAdmin);
 
 //------------------------------Auth----------------------------------------------------------------
 
