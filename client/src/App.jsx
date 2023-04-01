@@ -24,7 +24,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Comments from "./pages/Comments";
 import Estadistica from "./pages/Estadistica";
 import PublicacionesUsuario from "./pages/PublicacionesUsuario";
-
+import 'bootstrap/dist/css/bootstrap.css';
 
 const App = () => {
   const { logUser: globalUser } = useSelector((state) => state.logUser);
