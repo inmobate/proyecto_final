@@ -19,6 +19,7 @@ const Card2 = ({ id, property }) => {
   const onClose = () => {
     if (isDeleted) {
       setIsdeleted(false);
+      console.log("es true y paso a false");
       deleteProp(id);
     } else {
       setIsdeleted(true);
