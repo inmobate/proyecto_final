@@ -12,7 +12,7 @@ import Footerbar from "../components/Footerbar";
 
 const Search = () => {
   const { filter } = useParams();
-  const { data, error, isLoading } = useGetPropertiesByCityQuery(filter);
+  const { data, isLoading } = useGetPropertiesByCityQuery(filter);
 
   return (
     <Container>
