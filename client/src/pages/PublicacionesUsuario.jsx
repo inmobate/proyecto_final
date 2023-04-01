@@ -1,32 +1,34 @@
 import styled from "styled-components";
 
-import Navbar from "../components/Navbar";
+
 
 import Filterbar from "../components/Filterbar";
 
-import Cards from "../components/Cards";
 
 import Footerbar from "../components/Footerbar";
-import Infinite from "../components/InfiniteScroll";
+
 import Sidebar from "../components/Dash/Sidebar";
 import { useState } from "react";
+import PubliUsuario from "../components/Dash/PubliUsuario";
 import Navbar2 from "../components/Dash/NavBar2";
-import Infinite2 from "../components/InfiniteScrolll2";
 
 
-const Profile= () => {
+
+
+const PublicacionesUsuario= () => {
    const [sidebarOpen,setsidebarOpen] =useState(true)
   return (
-    <Container className={sidebarOpen?"sidebarState active":"sidebarState"}>
+      <Container className={sidebarOpen?"sidebarState active":"sidebarState"}>
    
-       <Navbar2 />
+       <Navbar2/>
       <Header>
 
         <Sidebar sidebarOpen={sidebarOpen}setsidebarOpen={setsidebarOpen}/>
       </Header>
       <Main>
+     <PubliUsuario/>
         {/* <Cards /> */}
-        <Infinite2 />
+
       </Main>
       <Footer>
 <Filterbar/>
@@ -68,5 +70,4 @@ const Footer = styled.footer`
 `;
 
 
-export default Profile;
-
+export default PublicacionesUsuario;
