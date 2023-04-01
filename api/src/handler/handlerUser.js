@@ -38,54 +38,72 @@ const allProperty = async (req, res) => {
       },
     ],
   });
-  const { city, province, page = 0, size = 12 } = req.query;
+  const { city, province, page = 0, size = 12, minPrice, maxPrice } = req.query;
 
-  if (page && size) {
-    let options = {
-      limit: +size,
-      offset: +page * +size,
-    };
+  switch (true) {
 
-    const { count, rows } = await Property.findAndCountAll(options);
+    case minPrice !== undefined && maxPrice !== undefined:
+      const filter = datos.filter((el) => {
+        return el.price >= minPrice && el.price <= maxPrice;
+      });
+      return res.json(filter);
 
-    return res.json({
-      total: count,
-      properties: rows,
-    });
-  }
+    case page !== undefined && size !== undefined:
+      let options = {
+        limit: +size,
+        offset: +page * +size,
+      };
+      const { count, rows } = await Property.findAndCountAll(options);
+      return res.json({
+        total: count,
+        properties: rows,
+      });
 
-  if (city) {
-    let propertyCity = await Property.findAll({
-      where: {
-        city: { [Op.iLike]: `%${city}%` },
-      },
-      //falta incluir los modelos servicios y tipos para cuando
-      //busque una propiedad por ciudad  te muestre que tipo es y que servicios brinda
-    });
-    try {
+    case city !== undefined:
+      let propertyCity = await Property.findAll({
+        where: {
+          city: { [Op.iLike]: `%${city}%` },
+        },
+        include: [
+          {
+            model: Service,
+            attributes: ["name", "icon"],
+            through: { attributes: [] },
+          },
+          {
+            model: PropertyType,
+            attributes: ["name"],
+          },
+        ],
+      });
       return res.status(200).json(propertyCity);
-    } catch (error) {
-      res.status(400).json({ Error: error.menssage });
-    }
-  } else if (province) {
-    let propertyProvince = await Property.findAll({
-      where: {
-        province: { [Op.iLike]: province },
-      },
-      //falta incluir los modelos servicios y tipos para cuando
-      //busque una propiedad por ciudad  te muestre que tipo es y que servicios brinda
-    });
-    try {
+
+    case province !== undefined:
+      let propertyProvince = await Property.findAll({
+        where: {
+          province: { [Op.iLike]: province },
+        },
+        include: [
+          {
+            model: Service,
+            attributes: ["name", "icon"],
+            through: { attributes: [] },
+          },
+          {
+            model: PropertyType,
+            attributes: ["name"],
+          },
+        ],
+      });
       return res.status(200).json(propertyProvince);
-    } catch (error) {
-      res.status(400).json({ Error: error.menssage });
-    }
+      
+    default:
+      return res.status(200).json(datos);
   }
-  res.status(200).json(datos);
 };
 const allPropertyById = async (req, res) => {
   const { id } = req.params;
-  console.log(req.params)
+  console.log(req.params);
   try {
     const datos = await Property.findOne({
       where: { id },
@@ -93,7 +111,7 @@ const allPropertyById = async (req, res) => {
         {
           model: Service,
           through: { attributes: [] },
-        }
+        },
       ],
     });
 
@@ -106,18 +124,18 @@ const allPropertyById = async (req, res) => {
 
 const postProperty = async (req, res) => {
   const {
-    price,//
-    description,//
-    bathrooms,//
-    room,//
-    title,//
+    price, //
+    description, //
+    bathrooms, //
+    room, //
+    title, //
     city,
     province,
     address,
-    pictures,//
-    type,//
-    service,//
-    beds//
+    pictures, //
+    type, //
+    service, //
+    beds, //
   } = req.body;
   try {
     if (
@@ -146,7 +164,7 @@ const postProperty = async (req, res) => {
         room,
         title,
         pictures,
-        beds
+        beds,
       });
       res.status(201).json(newproperty);
     }
@@ -199,7 +217,7 @@ const putProperty = async (req, res) => {
         },
       }
     );
-    console.log(updatedProperty)
+    console.log(updatedProperty);
     res.status(200).json(`la propiedad  fue modificada con exito`);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -216,32 +234,31 @@ const allUsers = async (req, res) => {
 };
 
 const postUsers = async (req, res) => {
-  const {id, name, lastName, email } = req.body;
-  const usuario = await User.findOne({where:{email: email}})
+  const { id, name, lastName, email } = req.body;
+  const usuario = await User.findOne({ where: { email: email } });
   try {
-  if(!usuario){
-    // hash = await bcrypt.hash(password, 16);
-    const newPost = await User.create({
-      name,
-      lastName,
-      email,
-      id
-      // password: hash,
-    });
-    res.status(201).send(newPost);
-  }else{
-    res.status(200).json(usuario)
-  }
+    if (!usuario) {
+      // hash = await bcrypt.hash(password, 16);
+      const newPost = await User.create({
+        name,
+        lastName,
+        email,
+        id,
+        // password: hash,
+      });
+      res.status(201).send(newPost);
+    } else {
+      res.status(200).json(usuario);
+    }
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
 };
 
-
 const putUsers = async (req, res) => {
   const { name, lastName, email, password } = req.body;
-  console.log(req.body)
-  console.log("id del usuario ", req.params.id)
+  console.log(req.body);
+  console.log("id del usuario ", req.params.id);
   try {
     const updatedUser = await User.update(
       {
@@ -261,19 +278,6 @@ const putUsers = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const deleteUser = async (req, res) => {
   const { id } = req.params;
@@ -374,7 +378,7 @@ const deletePublication = async (req, res) => {
 const allReservas = async (req, res) => {
   const reserva = await getReservas();
   try {
-    res.status(200).json( reserva);
+    res.status(200).json(reserva);
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
@@ -383,7 +387,7 @@ const allReservas = async (req, res) => {
 const allSale = async (req, res) => {
   const ventas = await getVentas();
   try {
-    res.status(200).json( ventas);
+    res.status(200).json(ventas);
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
@@ -428,7 +432,7 @@ const postBooking = async (req, res) => {
         },
       }
     );
-      console.log(req.params)
+    console.log(req.params);
     res.status(200).json(newBooking);
   } catch (error) {
     res.status(400).json({ Error: error.message });
