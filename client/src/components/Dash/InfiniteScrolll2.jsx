@@ -4,7 +4,7 @@ import styled from "styled-components";
 import local from "../../app/api/config";
 import Card2 from "./Card2";
 
-const Infinite2 = () => {
+const Infinite = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [properties, setProperties] = useState([]);
   const [totalProperties, setTotalProperties] = useState(0);
@@ -47,4 +47,4 @@ const Container = styled.section`
   gap: 2em;
 `;
 
-export default Infinite2;
+export default Infinite;

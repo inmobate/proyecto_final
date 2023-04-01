@@ -18,7 +18,7 @@ const Profile = () => {
       </Header>
       <Main>
         {/* <Cards /> */}
-        <Infinite2 />
+        <Infinite2/>
       </Main>
       <Footer>
         <Filterbar />
