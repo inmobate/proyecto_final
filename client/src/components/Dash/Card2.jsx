@@ -1,15 +1,39 @@
+import { useState } from "react";
 import styled from "styled-components";
+import houseError from "../../assets/houseError.svg";
 
-import houseError from "../assets/houseError.svg";
-
-
-const Card2 = ({ property}) => {
+const Card2 = ({ id, property }) => {
   const { pictures, city, country, price } = property;
-
   
+  const [isDeleted, setIsdeleted] = useState(false);
+
+  const deleteProp = (id) => {
+    return function () {
+      //fetch(`http://localhost:3001/admin/remove?=${property}/${id}`) deploy rute
+      fetch(`http://localhost:3001/admin/?remove=property/${id}`)
+        .then((value) => value.json())
+        .then((response) => console.log(response));
+    };
+  };
+
+const onClose = () => {
+  if (isDeleted) {
+    setIsdeleted(false);
+    console.log("es true y paso a false");
+    deleteProp(id);
+  } else {
+    setIsdeleted(true);
+    console.log("es false y paso a true");
+  }
+};
+
   return (
     <Container>
-      <button className="boton">Eliminar</button>
+      {isDeleted ? (
+        <button onClick={() => onClose(id)}> ✅ </button>
+      ) : (
+        <button onClick={() => onClose(id)}> ❌ </button>
+      )}
       <ImageWrapper>
         <Image
           src={pictures[0]}
@@ -31,8 +55,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   .boton{
-   --c:  #ffb9e4; 
-  
+  --c:  #ffb9e4; 
   box-shadow: 25px inset var(--c); 
   --_g: linear-gradient(var(--c) 0 0) no-repeat;
   background: 
@@ -75,6 +98,10 @@ button {
   border: none;
 }
 
+
+  .boton {
+    color: red;
+  }
 `;
 
 const ImageWrapper = styled.div`

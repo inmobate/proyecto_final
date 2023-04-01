@@ -63,9 +63,13 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       beds: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: 2,
+      },
+      soft_delete: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
     },
     {
