@@ -1,35 +1,27 @@
 import styled from "styled-components";
 
-import Navbar from "../components/Navbar";
-
 import Filterbar from "../components/Filterbar";
 
-import Cards from "../components/Cards";
-
-import Footerbar from "../components/Footerbar";
-import Infinite from "../components/InfiniteScroll";
-import Sidebar from "../components/Dash/Sidebar";
 import { useState } from "react";
+import Infinite2 from "../components/Dash/InfiniteScrolll2";
 import Navbar2 from "../components/Dash/NavBar2";
-import Infinite2 from "../components/InfiniteScrolll2";
+import Sidebar from "../components/Dash/Sidebar";
+import Footerbar from "../components/Footerbar";
 
-
-const Profile= () => {
-   const [sidebarOpen,setsidebarOpen] =useState(true)
+const Profile = () => {
+  const [sidebarOpen, setsidebarOpen] = useState(true);
   return (
-    <Container className={sidebarOpen?"sidebarState active":"sidebarState"}>
-   
-       <Navbar2 />
+    <Container className={sidebarOpen ? "sidebarState active" : "sidebarState"}>
+      <Navbar2 />
       <Header>
-
-        <Sidebar sidebarOpen={sidebarOpen}setsidebarOpen={setsidebarOpen}/>
+        <Sidebar sidebarOpen={sidebarOpen} setsidebarOpen={setsidebarOpen} />
       </Header>
       <Main>
         {/* <Cards /> */}
         <Infinite2 />
       </Main>
       <Footer>
-<Filterbar/>
+        <Filterbar />
         <Footerbar />
       </Footer>
     </Container>
@@ -39,15 +31,15 @@ const Profile= () => {
 const Container = styled.div`
   min-width: 100%;
   min-height: 100vh;
-  display:grid;
-  grid-template-columns:90px auto;
-  transition:all 0.6s;
-  &.active{
-    grid-template-columns :300px auto;
+  display: grid;
+  grid-template-columns: 90px auto;
+  transition: all 0.6s;
+  &.active {
+    grid-template-columns: 300px auto;
   }
-.NavBar2{
-  position:ri;
-}
+  .NavBar2 {
+    position: ri;
+  }
 `;
 
 const Header = styled.header`
@@ -60,13 +52,10 @@ const Header = styled.header`
 const Main = styled.main`
   height: 100%;
   padding: 1em;
-  
 `;
 
 const Footer = styled.footer`
   display: none;
 `;
 
-
 export default Profile;
-
