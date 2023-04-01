@@ -6,8 +6,9 @@ import { usePostUserMutation } from "./app/api/properties";
 import { setUser } from "./app/slices/logUser";
 import Comments from "./pages/Comments";
 import Detail from "./pages/Detail";
+import Search from "./pages/Search";
+import FilterType from "./pages/FilterType";
 import Estadistica from "./pages/Estadistica";
-import Filter from "./pages/Filter";
 import FilterCombine from "./pages/FilterCombine";
 import Home from "./pages/Home";
 import Landing from "./pages/Landing";
@@ -23,12 +24,12 @@ import Step7 from "./pages/PropertiesForm/Step7";
 import Step8 from "./pages/PropertiesForm/Step8";
 import Step9 from "./pages/PropertiesForm/Step9";
 import PublicacionesUsuario from "./pages/PublicacionesUsuario";
-import Search from "./pages/Search";
+
 
 const App = () => {
   const { logUser: globalUser } = useSelector((state) => state.logUser);
   const { user, isAuthenticated } = useAuth0();
-  const [postUser, { isLoading }] = usePostUserMutation();
+  const [postUser] = usePostUserMutation();
   const dispatch = useDispatch();
 
   async function addUser(data) {
@@ -56,7 +57,7 @@ const App = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/search/:filter" element={<Search />} />
-          <Route path="/filter/:filter" element={<Filter />} />
+          <Route path="/type/:filter" element={<FilterType />} />
           <Route path="/filterCombine" element={<FilterCombine />} />
           <Route path="/addproperty" element={<PropertiesForm />} />
           <Route path="/addproperty/step1" element={<Step1 />} />
