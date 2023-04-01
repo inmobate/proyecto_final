@@ -1,23 +1,16 @@
 import styled from "styled-components";
 
 import Navbar from "../components/Navbar";
-
-import Filterbar from "../components/Filterbar";
-
-import Cards from "../components/Cards";
-
 import Footerbar from "../components/Footerbar";
 import Infinite from "../components/InfiniteScroll";
-
-
+import BarFilter from "../components/BarFilter";
 
 const Home = () => {
-  
   return (
-    <Container >
+    <Container>
       <Header>
         <Navbar />
-        <Filterbar />
+        <BarFilter />
       </Header>
       <Main>
         {/* <Cards /> */}
@@ -45,7 +38,6 @@ const Header = styled.header`
 const Main = styled.main`
   height: 100%;
   padding: 1em;
-  
 `;
 
 const Footer = styled.footer`

@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { useGetPropertiesQuery } from "../app/api/properties";
-import Card from "./Card";
+import React, { useEffect, useState } from "react";
 import InfiniteScroll2 from "react-infinite-scroll-component";
-import local from "../app/api/config"
+import styled from "styled-components";
+import local from "../../app/api/config";
 import Card2 from "./Card2";
 
 const Infinite2 = () => {
@@ -36,9 +33,7 @@ const Infinite2 = () => {
       <Container>
         {properties &&
           properties.map((el) => (
-            <Link to={`/detail/${el.id}`} key={el.id}>
-              <Card2 key={el.id} property={el} />
-            </Link>
+            <Card2 key={el.id} id={el.id} property={el} />
           ))}
       </Container>
     </InfiniteScroll2>

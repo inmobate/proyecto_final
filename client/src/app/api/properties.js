@@ -5,7 +5,7 @@ export const properties = createApi({
   reducerPath: "properties",
 
   baseQuery: fetchBaseQuery({
-  //baseUrl: "http://localhost:3001",
+    //baseUrl: "http://localhost:3001",
     baseUrl: `${local}`,
   }),
 
@@ -49,9 +49,12 @@ export const properties = createApi({
         };
       },
     }),
+
+    getPropertiesByType: builder.query({
+      query: (type) => `/property?type=${type}`,
+    }),
   }),
 });
-
 
 export const {
   useGetPropertiesQuery,
@@ -60,4 +63,5 @@ export const {
   useGetTypeQuery,
   useGetServiceQuery,
   usePostUserMutation,
+  useGetPropertiesByTypeQuery
 } = properties;

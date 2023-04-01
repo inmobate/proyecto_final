@@ -67,8 +67,5 @@ const Items = styled.div`
   gap: 1em;
 `;
 
-const Item = styled.div`
-  color: #000;
-`;
 
 export default Navbar;

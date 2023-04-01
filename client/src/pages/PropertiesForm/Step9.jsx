@@ -8,29 +8,28 @@ import {
 } from "./styles";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import local from "../../app/api/config"
+import local from "../../app/api/config";
 const Step9 = () => {
   const {
-    type,//
+    type, //
     roomType,
-    description,//
-    title,//
+    description, //
+    title, //
     location,
     travellers,
-    rooms,//
-    beds,//
-    bathrooms,//
-    price,//
-    services,//
-    images,//
+    rooms, //
+    beds, //
+    bathrooms, //
+    price, //
+    services, //
+    images, //
   } = useSelector((state) => state.propertyToAdd);
 
   const navigate = useNavigate();
 
   function handleSubmit(property) {
-    fetch(`${local}/property`, {
+    fetch(`http://localhost:3001/property`, {
       method: "POST",
-      mode: "no-cors",
       headers: {
         "Content-Type": "application/json",
       },
@@ -40,8 +39,8 @@ const Step9 = () => {
         if (response.ok) {
           alert("Creado correctamente");
         }
-        navigate("/home");
-        window.location.reload();
+        /* navigate("/home");
+        window.location.reload(); */
       })
       .catch((error) => {
         alert(error.message);
@@ -123,9 +122,9 @@ const Step9 = () => {
               room: rooms,
               title: title,
               pictures: [images],
-              type: roomType,
-              services: services,
-              habitacion: rooms,
+              type: type,
+              service: services,
+              room: rooms,
               beds: beds,
             })
           }

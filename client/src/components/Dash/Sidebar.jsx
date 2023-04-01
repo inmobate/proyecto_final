@@ -8,7 +8,7 @@ import {
   AiFillCalendar
 } from "react-icons/ai";
 import { ImStatsBars } from "react-icons/im";
-import { Link } from "react-router-dom";
+import {NavLink } from "react-router-dom";
 export default function Sidebar({ sidebarOpen, setsidebarOpen }) {
   // const open = () => {
   //   setsidebarOpen(!sidebarOpen);
@@ -24,8 +24,8 @@ export default function Sidebar({ sidebarOpen, setsidebarOpen }) {
         </div>
       </div>
       {linksArray.map(({icon, label, to}) => (
-        <div className="LinkContainer" key ={label}>
-          <Link to={to} className ="Links">
+        <div className="me-2" key ={label}>
+          <NavLink to={to} activeClassName="active" className ="Links">
             <div className="Linkicon">
               {icon}
             </div>
@@ -33,7 +33,7 @@ export default function Sidebar({ sidebarOpen, setsidebarOpen }) {
               <span>{label}</span>
             )
             }
-          </Link>
+          </NavLink>
         </div>
       ))}
     </Container>
@@ -61,11 +61,7 @@ const linksArray = [
     icon: <AiOutlineForm />,
     to: "/mypublic",
   },
-  {
-    label: "Imformacion",
-    icon: <AiFillCalendar />,
-    to: "/perfil",
-  }, {
+   {
     label: "Comentarios",
     icon: <AiFillHome />,
     to: "/comments",
@@ -79,7 +75,7 @@ const Container = styled.div`
   padding-top: 20px;
   .Sidebarbutton {
     /* border: none; */
-    position: relative;
+    position:fixed;
     top: ${variables.xxlSpacing};
     right: -15px;
     width: 32px;
@@ -106,6 +102,7 @@ const Container = styled.div`
     }
   }
   .LinkContainer {
+    color:#ff9de0;;
     margin: 8px 0;
     padding: 0 15%;
 
@@ -114,11 +111,14 @@ const Container = styled.div`
     align-items:center;
     text-decoration:none;
     padding:calc(${variables.smSpacing}-2px) 0;
+    color:black;
+    font-size:22px;
     .Linkicon{
       padding:${variables.smSpacing} ${variables.mdSpacing};
       display:flex;
       svg{
-        font-size:25px;
+        font-size:30px;
+        color:black;
       }
     }
   }
