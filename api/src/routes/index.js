@@ -37,7 +37,7 @@ const {
   redirectLogin,
   authenticateToken,
 } = require("../middlewares/auth.js");
-const { notification, orden} = require("../metodo_de_pagos/mercadoPago")
+const { notification, orden } = require("../metodo_de_pagos/mercadoPago");
 const { passport, authenticate } = require("../passport.js");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET_KEY } = process.env;
@@ -74,8 +74,8 @@ router.post("/:id_autor/publication", postPublications); // lista
 router.put("/:id/publication", putPublications);
 router.delete("/:id/publication", deletePublication);
 //--------------------------------------------------------------------------------//
-router.get("/admin/get?=", getAdmin);
-router.delete("/admin/remove?=/:id", deleteAdmin);
+router.get("/admin/?get=", getAdmin);
+router.put("/admin/remove?=remove", deleteAdmin);
 
 //------------------------------Auth----------------------------------------------------------------
 
@@ -190,8 +190,6 @@ router.get("/cancel-order", cancelarOrden);
 router.post("/orderPago/:id", orden);
 
 router.post("/notificacion", notification);
-
-
 
 module.exports = router;
 

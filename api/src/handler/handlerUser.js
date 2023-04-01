@@ -24,7 +24,7 @@ const { getVentas } = require("../controller/controllerSale");
 const { propertyById } = require("../controller/controllerProperty");
 const { typeDb } = require("../controller/controllerType");
 const CommentDelete = require("../handler/delete/deleteCommit.js");
-const publicationDelete = require("../handler/delete/deletePublication.js");
+const propertyDelete = require("./delete/deleteProperty.js");
 const userDelete = require("../handler/delete/deleteUser.js");
 // const {where}=require("sequelize");
 
@@ -85,7 +85,7 @@ const allProperty = async (req, res) => {
 };
 const allPropertyById = async (req, res) => {
   const { id } = req.params;
-  console.log(req.params)
+  console.log(req.params);
   try {
     const datos = await Property.findOne({
       where: { id },
@@ -93,7 +93,7 @@ const allPropertyById = async (req, res) => {
         {
           model: Service,
           through: { attributes: [] },
-        }
+        },
       ],
     });
 
@@ -106,18 +106,18 @@ const allPropertyById = async (req, res) => {
 
 const postProperty = async (req, res) => {
   const {
-    price,//
-    description,//
-    bathrooms,//
-    room,//
-    title,//
+    price, //
+    description, //
+    bathrooms, //
+    room, //
+    title, //
     city,
     province,
     address,
-    pictures,//
-    type,//
-    service,//
-    beds//
+    pictures, //
+    type, //
+    service, //
+    beds, //
   } = req.body;
   try {
     if (
@@ -148,13 +148,13 @@ const postProperty = async (req, res) => {
         pictures,
         beds,
         type,
-        service
+        service,
       });
-      const services = await Service.findAll({where:{name: service}});
-      const types = await Type.findOne({where:{name: type}});
+      const services = await Service.findAll({ where: { name: service } });
+      const types = await Type.findOne({ where: { name: type } });
       newproperty.addService(services);
       newproperty.setType(types);
-      
+
       res.status(201).json(newproperty);
     }
   } catch (error) {
@@ -206,7 +206,7 @@ const putProperty = async (req, res) => {
         },
       }
     );
-    console.log(updatedProperty)
+    console.log(updatedProperty);
     res.status(200).json(`la propiedad  fue modificada con exito`);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -223,32 +223,31 @@ const allUsers = async (req, res) => {
 };
 
 const postUsers = async (req, res) => {
-  const {id, name, lastName, email } = req.body;
-  const usuario = await User.findOne({where:{email: email}})
+  const { id, name, lastName, email } = req.body;
+  const usuario = await User.findOne({ where: { email: email } });
   try {
-  if(!usuario){
-    // hash = await bcrypt.hash(password, 16);
-    const newPost = await User.create({
-      name,
-      lastName,
-      email,
-      id
-      // password: hash,
-    });
-    res.status(201).send(newPost);
-  }else{
-    res.status(200).json(usuario)
-  }
+    if (!usuario) {
+      // hash = await bcrypt.hash(password, 16);
+      const newPost = await User.create({
+        name,
+        lastName,
+        email,
+        id,
+        // password: hash,
+      });
+      res.status(201).send(newPost);
+    } else {
+      res.status(200).json(usuario);
+    }
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
 };
 
-
 const putUsers = async (req, res) => {
   const { name, lastName, email, password } = req.body;
-  console.log(req.body)
-  console.log("id del usuario ", req.params.id)
+  console.log(req.body);
+  console.log("id del usuario ", req.params.id);
   try {
     const updatedUser = await User.update(
       {
@@ -268,19 +267,6 @@ const putUsers = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const deleteUser = async (req, res) => {
   const { id } = req.params;
@@ -371,7 +357,7 @@ const postPublications = async (req, res) => {
 const deletePublication = async (req, res) => {
   const { id } = req.params;
   try {
-    const deletePublic = await publicationDelete(id);
+    const deletePublic = await propertyDelete(id);
     res.status(200).json(deletePublic);
   } catch (error) {
     res.status(400).json({ Error: error.message });
@@ -381,7 +367,7 @@ const deletePublication = async (req, res) => {
 const allReservas = async (req, res) => {
   const reserva = await getReservas();
   try {
-    res.status(200).json( reserva);
+    res.status(200).json(reserva);
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
@@ -390,7 +376,7 @@ const allReservas = async (req, res) => {
 const allSale = async (req, res) => {
   const ventas = await getVentas();
   try {
-    res.status(200).json( ventas);
+    res.status(200).json(ventas);
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
@@ -435,7 +421,7 @@ const postBooking = async (req, res) => {
         },
       }
     );
-      console.log(req.params)
+    console.log(req.params);
     res.status(200).json(newBooking);
   } catch (error) {
     res.status(400).json({ Error: error.message });
@@ -495,7 +481,8 @@ const getAdmin = async (req, res) => {
 const deleteAdmin = async (req, res) => {
   const { remove } = req.query;
   const { id } = req.params;
-
+  console.log("query", req.query);
+  console.log("params", req.params);
   try {
     if (remove === "User") {
       const deleteuser = await userDelete(id);
@@ -505,8 +492,8 @@ const deleteAdmin = async (req, res) => {
       const commentsdelete = await CommentDelete(id);
       res.status(200).json(commentsdelete);
     }
-    if (remove === "Publication") {
-      const deletePublic = await publicationDelete(id);
+    if (remove === "property") {
+      const deletePublic = await propertyDelete(id);
       res.status(200).json(deletePublic);
     }
   } catch (error) {
