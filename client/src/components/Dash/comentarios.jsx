@@ -40,7 +40,7 @@ export default function Comentarios() {
           </div>
 
 
-          <small>2 days ago</small>
+          <small>1 days ago</small>
 
           </div>
 
