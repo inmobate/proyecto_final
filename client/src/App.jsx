@@ -22,6 +22,10 @@ import Step8 from "./pages/PropertiesForm/Step8";
 import Step9 from "./pages/PropertiesForm/Step9";
 import { setUser } from "./app/slices/logUser";
 import { useSelector, useDispatch } from "react-redux";
+import Comments from "./pages/Comments";
+import Estadistica from "./pages/Estadistica";
+import PublicacionesUsuario from "./pages/PublicacionesUsuario";
+
 
 const App = () => {
   const { logUser: globalUser } = useSelector((state) => state.logUser);
