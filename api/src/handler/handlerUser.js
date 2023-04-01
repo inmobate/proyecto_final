@@ -24,7 +24,7 @@ const { getVentas } = require("../controller/controllerSale");
 const { propertyById } = require("../controller/controllerProperty");
 const { typeDb } = require("../controller/controllerType");
 const CommentDelete = require("../handler/delete/deleteCommit.js");
-const publicationDelete = require("../handler/delete/deletePublication.js");
+const propertyDelete = require("./delete/deleteProperty.js");
 const userDelete = require("../handler/delete/deleteUser.js");
 // const {where}=require("sequelize");
 
@@ -175,6 +175,7 @@ const postProperty = async (req, res) => {
       newproperty.setType(types);
 
       console.log(newproperty);
+
       res.status(201).json(newproperty);
     }
   } catch (error) {
@@ -377,7 +378,7 @@ const postPublications = async (req, res) => {
 const deletePublication = async (req, res) => {
   const { id } = req.params;
   try {
-    const deletePublic = await publicationDelete(id);
+    const deletePublic = await propertyDelete(id);
     res.status(200).json(deletePublic);
   } catch (error) {
     res.status(400).json({ Error: error.message });
@@ -501,7 +502,7 @@ const getAdmin = async (req, res) => {
 const deleteAdmin = async (req, res) => {
   const { remove } = req.query;
   const { id } = req.params;
-
+  
   try {
     if (remove === "User") {
       const deleteuser = await userDelete(id);
@@ -511,8 +512,8 @@ const deleteAdmin = async (req, res) => {
       const commentsdelete = await CommentDelete(id);
       res.status(200).json(commentsdelete);
     }
-    if (remove === "Publication") {
-      const deletePublic = await publicationDelete(id);
+    if (remove === "property") {
+      const deletePublic = await propertyDelete(id);
       res.status(200).json(deletePublic);
     }
   } catch (error) {
