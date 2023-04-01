@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { useGetTypeQuery } from "../app/api/properties";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const BarFilter = () => {
   const [translate, setTranslate] = useState(0);
   const { data } = useGetTypeQuery();
+  const navigate = useNavigate()
 
   return (
     <Container>
       <Flex style={{ right: `${translate}px` }}>
-        {data && data.map((el) => <Item>{el.name}</Item>)}
+        {data && data.map((el) => <Item onClick={() => navigate(`/type/${el.name}`)}>{el.name}</Item>)}
       </Flex>
       <HandlerLeft
         onClick={() => setTranslate(translate - 200)}

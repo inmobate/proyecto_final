@@ -38,12 +38,18 @@ const allProperty = async (req, res) => {
       },
     ],
   });
-  const { city, province, page = 0, size = 12, minPrice, maxPrice } = req.query;
+  const { city, province, page, size, minPrice, maxPrice, type } = req.query;
 
   switch (true) {
 
+    case type !== undefined:
+      const filterType = datos.filter((el) => {
+        return el.type === type;
+      });
+      return res.json(filterType);
+
     case minPrice !== undefined && maxPrice !== undefined:
-      const filter = datos.filter((el) => {
+      const filterPrice = datos.filter((el) => {
         return el.price >= minPrice && el.price <= maxPrice;
       });
       return res.json(filter);
@@ -96,7 +102,7 @@ const allProperty = async (req, res) => {
         ],
       });
       return res.status(200).json(propertyProvince);
-      
+
     default:
       return res.status(200).json(datos);
   }
