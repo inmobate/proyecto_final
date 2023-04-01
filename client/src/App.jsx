@@ -21,6 +21,10 @@ import Step8 from "./pages/PropertiesForm/Step8";
 import Step9 from "./pages/PropertiesForm/Step9";
 import { setUser } from "./app/slices/logUser";
 import { useSelector, useDispatch } from "react-redux";
+import Comments from "./pages/Comments";
+import Estadistica from "./pages/Estadistica";
+import PublicacionesUsuario from "./pages/PublicacionesUsuario";
+
 
 const App = () => {
   const { logUser: globalUser } = useSelector((state) => state.logUser);
@@ -66,6 +70,9 @@ const App = () => {
       <Route path="/addproperty/step8" element={<Step8/>}/>
       <Route path="/addproperty/step9" element={<Step9/>}/>
       <Route path="/dashboard" element={<Profile/>}/>
+      <Route path="/comments" element={<Comments/>}/>
+      <Route path="/stats" element={<Estadistica/>}/>
+      <Route path="/mypublic" element={<PublicacionesUsuario/>}/>
     </Routes>
     </BrowserRouter>
     </div>

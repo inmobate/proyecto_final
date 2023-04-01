@@ -16,10 +16,10 @@ const Navbar2 = () => {
         {/* <Searchbar/> */}
         <Elements>
           <Link to="/home">
-            {/* <Brand>
+            <Brand>
               <Img src={house} alt="imagen" />
               <Title>INMOBATE</Title>
-            </Brand> */}
+            </Brand>
           </Link>
         </Elements>
       </Nav2>
@@ -29,9 +29,10 @@ const Navbar2 = () => {
 };
 
 const Nav2 = styled.nav`
-width:-150px;
-  padding: 10px;
+width:-70px;
+  padding: 50px;
   background: #ffff;
+  border:none;
 `;
 
 const Elements = styled.div`
@@ -49,12 +50,12 @@ const Brand = styled.div`
 `;
 
 const Img = styled.img`
-  width: 20px;
+  width: 30px;
 `;
 
 const Title = styled.div`
   font-family: "Righteous", cursive;
-  font-size: 20px;
+  font-size: 40px;
 `;
 
 
