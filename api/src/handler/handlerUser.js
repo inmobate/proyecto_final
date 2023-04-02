@@ -175,6 +175,8 @@ const postProperty = async (req, res) => {
       newproperty.addService(services);
       newproperty.setType(types);
 
+      console.log(newproperty);
+
       res.status(201).json(newproperty);
     }
   } catch (error) {
