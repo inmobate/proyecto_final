@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import "bootstrap/dist/css/bootstrap.css";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { usePostUserMutation } from "./app/api/properties";
 import { setUser } from "./app/slices/logUser";
 import Comments from "./pages/Comments";
 import Detail from "./pages/Detail";
-import Search from "./pages/Search";
-import FilterType from "./pages/FilterType";
 import Estadistica from "./pages/Estadistica";
 import FilterCombine from "./pages/FilterCombine";
+import FilterType from "./pages/FilterType";
 import Home from "./pages/Home";
 import Landing from "./pages/Landing";
 import Profile from "./pages/Profile";
@@ -25,8 +25,13 @@ import Step7 from "./pages/PropertiesForm/Step7";
 import Step8 from "./pages/PropertiesForm/Step8";
 import Step9 from "./pages/PropertiesForm/Step9";
 import PublicacionesUsuario from "./pages/PublicacionesUsuario";
+<<<<<<< HEAD
 import 'bootstrap/dist/css/bootstrap.css';
 import MercadoPago from "./components/MercadoPago";
+=======
+import Search from "./pages/Search";
+
+>>>>>>> 3572748c6ae6faff8d47e80ea4356003b9a5ab1b
 const App = () => {
   const { logUser: globalUser } = useSelector((state) => state.logUser);
   const { user, isAuthenticated } = useAuth0();
@@ -59,7 +64,11 @@ const App = () => {
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/search/:filter" element={<Search />} />
           <Route path="/type/:filter" element={<FilterType />} />
+<<<<<<< HEAD
           <Route path="/mercadoPago" element={<MercadoPago />} />
+=======
+
+>>>>>>> 3572748c6ae6faff8d47e80ea4356003b9a5ab1b
           <Route path="/filterCombine" element={<FilterCombine />} />
           <Route path="/addproperty" element={<PropertiesForm />} />
           <Route path="/addproperty/step1" element={<Step1 />} />
