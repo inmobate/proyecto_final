@@ -104,8 +104,8 @@ const allProperty = async (req, res) => {
 };
 const allPropertyById = async (req, res) => {
   const { id } = req.params;
-  console.log(req.params);
-  console.log(req.params);
+  //console.log(req.params);
+  //console.log(req.params);
   try {
     const datos = await Property.findOne({
       where: { id },
@@ -516,25 +516,28 @@ const getAdmin = async (req, res) => {
 };
 
 const deleteAdmin = async (req, res) => {
-  const { remove } = req.query;
-  const { id } = req.params;
+  const { direction, id } = req.params;
+  const { soft_delete } = req.query;
   console.log("query", req.query);
   console.log("params", req.params);
   try {
-    if (remove === "User") {
-      const deleteuser = await userDelete(id);
+    if (direction === "User") {
+      const deleteuser = await userDelete(id, soft_delete);
+      console.log("user");
       res.status(200).json(deleteuser);
     }
-    if (remove === "Comments") {
-      const commentsdelete = await CommentDelete(id);
+    if (direction === "Comments") {
+      const commentsdelete = await CommentDelete(id, soft_delete);
+      console.log("comemets");
       res.status(200).json(commentsdelete);
     }
-    if (remove === "property") {
-      const deletePublic = await propertyDelete(id);
+    if (direction === "property") {
+      const deletePublic = await propertyDelete(id, soft_delete);
+      console.log("property");
       res.status(200).json(deletePublic);
     }
   } catch (error) {
-    res.status(404).json({ error: menssage });
+    res.status(404).json({ error: error.message });
   }
 };
 

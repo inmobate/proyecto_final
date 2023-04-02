@@ -66,8 +66,8 @@ router.put("/:id/users", deleteUser); //lista ruta que usara el admin
 //--------------------------------------------------------------------------------//
 // revisar y corregir
 router.get("/comentarios", allComments); //lista
-router.post("/:id_publication/comentarios", postComments); //lista
-router.delete("/:id/comentarios", deleteComments); // no le voy a hacer, comentarlo al grupo
+router.post("/comentarios/:id_publication", postComments); //lista
+router.delete("/comentarios/:id", deleteComments); // no le voy a hacer, comentarlo al grupo
 
 router.get("/publication", allPublications); //lista
 router.post("/:id_autor/publication", postPublications); // lista
@@ -75,7 +75,7 @@ router.put("/:id/publication", putPublications);
 router.delete("/:id/publication", deletePublication);
 //--------------------------------------------------------------------------------//
 router.get("/admin/?get=", getAdmin);
-router.put("/admin/remove?remove=", deleteAdmin);
+router.put("/admin/:direction/:id", deleteAdmin);
 
 //------------------------------Auth----------------------------------------------------------------
 

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
 import houseError from "../../assets/houseError.svg";
@@ -5,25 +6,27 @@ import houseError from "../../assets/houseError.svg";
 const Card2 = ({ id, property }) => {
   const { pictures, city, country, price } = property;
 
-  const [isDeleted, setIsdeleted] = useState(false);
+  const [isDeleted, setIsdeleted] = useState();
 
-  const deleteProp = (id) => {
-    return function () {
-      //fetch(`http://localhost:3001/admin/remove?=${property}/${id}`) deploy rute
-      fetch(`http://localhost:3001/admin/?remove=property/${id}`)
-        .then((value) => value.json())
-        .then((response) => console.log(response));
-    };
+  const deleteProp = async (id, boolean) => {
+    axios
+      .put(`http://localhost:3001/admin/property/${id}?soft_delete=${boolean}`)
+      .then((response) => {
+        console.log(response.data);
+      });
   };
 
-  const onClose = () => {
+  const onClose = async () => {
     if (isDeleted) {
       setIsdeleted(false);
-      console.log("es true y paso a false");
-      deleteProp(id);
+      console.log("uno");
+      await deleteProp(id, false);
+      console.log("dos");
     } else {
       setIsdeleted(true);
-      console.log("es false y paso a true");
+      console.log("tres");
+      deleteProp(id, true);
+      console.log("cuatro");
     }
   };
 
