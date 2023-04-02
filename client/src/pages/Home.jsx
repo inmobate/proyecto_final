@@ -13,7 +13,6 @@ const Home = () => {
         <BarFilter />
       </Header>
       <Main>
-        {/* <Cards /> */}
         <Infinite />
       </Main>
       <Footer>

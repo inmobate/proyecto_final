@@ -27,26 +27,25 @@ const Step9 = () => {
 
   const navigate = useNavigate();
 
-  function handleSubmit(property) {
-    fetch(`http://localhost:3001/property`, {
+async function handleSubmit(property) {
+  try {
+    const response = await fetch(`${local}/property`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(property),
-    })
-      .then((response) => {
-        if (response.ok) {
-          alert("Creado correctamente");
-        }
-        /* navigate("/home");
-        window.location.reload(); */
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-  }
+    });
 
+    if (response.ok) {
+      alert("Creado correctamente");
+    }
+    navigate("/home");
+    window.location.reload();
+  } catch (error) {
+    alert(error.message);
+  }
+}
   return (
     <Container>
       <Content>
@@ -124,7 +123,7 @@ const Step9 = () => {
               pictures: [images],
               type: type,
               service: services,
-              room: rooms,
+              
               beds: beds,
             })
           }

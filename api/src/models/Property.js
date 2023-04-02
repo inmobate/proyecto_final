@@ -16,6 +16,7 @@ module.exports = (sequelize) => {
       area: {
         type: DataTypes.INTEGER,
         allowNull: true,
+        defaultValue: 2000,
       },
       price: {
         type: DataTypes.INTEGER,
@@ -28,6 +29,7 @@ module.exports = (sequelize) => {
       floor: {
         type: DataTypes.INTEGER,
         allowNull: true,
+        defaultValue: 1,
       },
       country: {
         type: DataTypes.STRING,
@@ -49,6 +51,7 @@ module.exports = (sequelize) => {
       postal_code: {
         type: DataTypes.STRING,
         allowNull: true,
+        defaultValue: "p00001",
       },
       room: {
         type: DataTypes.INTEGER,

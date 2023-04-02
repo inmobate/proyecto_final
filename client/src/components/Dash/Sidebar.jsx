@@ -61,10 +61,15 @@ const linksArray = [
     icon: <AiOutlineForm />,
     to: "/mypublic",
   },
-   {
+  {
     label: "Comentarios",
     icon: <AiFillHome />,
     to: "/comments",
+  },
+  {
+    label: "Publicacion",
+    icon: <AiFillHome />,
+    to: "/addproperty",
   },
 ];
 
