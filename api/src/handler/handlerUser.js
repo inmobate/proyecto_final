@@ -104,7 +104,8 @@ const allProperty = async (req, res) => {
 };
 const allPropertyById = async (req, res) => {
   const { id } = req.params;
-  console.log(req.params);
+  //console.log(req.params);
+  //console.log(req.params);
   try {
     const datos = await Property.findOne({
       where: { id },
@@ -260,6 +261,19 @@ const postUsers = async (req, res) => {
     } else {
       res.status(200).json(usuario);
     }
+    if (!usuario) {
+      // hash = await bcrypt.hash(password, 16);
+      const newPost = await User.create({
+        name,
+        lastName,
+        email,
+        id,
+        // password: hash,
+      });
+      res.status(201).send(newPost);
+    } else {
+      res.status(200).json(usuario);
+    }
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
@@ -267,6 +281,8 @@ const postUsers = async (req, res) => {
 
 const putUsers = async (req, res) => {
   const { name, lastName, email, password } = req.body;
+  console.log(req.body);
+  console.log("id del usuario ", req.params.id);
   console.log(req.body);
   console.log("id del usuario ", req.params.id);
   try {
@@ -398,6 +414,7 @@ const allSale = async (req, res) => {
   const ventas = await getVentas();
   try {
     res.status(200).json(ventas);
+    res.status(200).json(ventas);
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
@@ -442,6 +459,7 @@ const postBooking = async (req, res) => {
         },
       }
     );
+    console.log(req.params);
     console.log(req.params);
     res.status(200).json(newBooking);
   } catch (error) {
@@ -500,24 +518,28 @@ const getAdmin = async (req, res) => {
 };
 
 const deleteAdmin = async (req, res) => {
-  const { remove } = req.query;
-  const { id } = req.params;
-  
+  const { direction, id } = req.params;
+  const { soft_delete } = req.query;
+  console.log("query", req.query);
+  console.log("params", req.params);
   try {
-    if (remove === "User") {
-      const deleteuser = await userDelete(id);
+    if (direction === "User") {
+      const deleteuser = await userDelete(id, soft_delete);
+      console.log("user");
       res.status(200).json(deleteuser);
     }
-    if (remove === "Comments") {
-      const commentsdelete = await CommentDelete(id);
+    if (direction === "Comments") {
+      const commentsdelete = await CommentDelete(id, soft_delete);
+      console.log("comemets");
       res.status(200).json(commentsdelete);
     }
-    if (remove === "property") {
-      const deletePublic = await propertyDelete(id);
+    if (direction === "property") {
+      const deletePublic = await propertyDelete(id, soft_delete);
+      console.log("property");
       res.status(200).json(deletePublic);
     }
   } catch (error) {
-    res.status(404).json({ error: menssage });
+    res.status(404).json({ error: error.message });
   }
 };
 
