@@ -36,11 +36,11 @@ const { User, Sale, Publication, Comment, Booking, Property, Service, Type} = se
 User.hasMany(Publication,{ foreignKey:"autorId" });
 Publication.belongsTo(User, { foreignKey: "autorId" });
 
-Publication.hasMany(Comment, { foreignKey: "publicId", sourceKey: "id" });
-Comment.belongsTo(Publication, { foreignKey: "publicId", targetKey: "id" });
+Property.hasMany(Comment, { foreignKey: "property_id", sourceKey: "id" });
+Comment.belongsTo(Publication, { foreignKey: "property_id", targetKey: "id" });
 
-User.hasMany(Comment, { foreignKey: "autor_comiId", sourceKey: "id" });
-Comment.belongsTo(User, { foreignKey: "autor_comiId", targetKey: "id" });
+User.hasMany(Comment, { foreignKey: "user_id", sourceKey: "id" });
+Comment.belongsTo(User, { foreignKey: "user_id", targetKey: "id" });
 
 User.hasMany(Booking,{ foreignKey: "autor_booId", sourceKey: "id" })
 Booking.belongsTo(User,{ foreignKey: "autor_booId", targetKey: "id" })

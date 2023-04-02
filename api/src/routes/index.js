@@ -37,6 +37,7 @@ const {
   redirectLogin,
   authenticateToken,
 } = require("../middlewares/auth.js");
+const createReview = require("../handler/post/postComments.js")
 const { notification, orden } = require("../metodo_de_pagos/mercadoPago");
 const { passport, authenticate } = require("../passport.js");
 const jwt = require("jsonwebtoken");
@@ -65,8 +66,8 @@ router.put("/:id/users", deleteUser); //lista ruta que usara el admin
 
 //--------------------------------------------------------------------------------//
 // revisar y corregir
-router.get("/comentarios", allComments); //lista
-router.post("/:id_publication/comentarios", postComments); //lista
+router.get("/comments", allComments); //lista
+router.post("/comment", createReview ); //lista
 router.delete("/:id/comentarios", deleteComments); // no le voy a hacer, comentarlo al grupo
 
 router.get("/publication", allPublications); //lista
