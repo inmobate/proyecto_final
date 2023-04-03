@@ -25,6 +25,8 @@ import Step7 from "./pages/PropertiesForm/Step7";
 import Step8 from "./pages/PropertiesForm/Step8";
 import Step9 from "./pages/PropertiesForm/Step9";
 import PublicacionesUsuario from "./pages/PublicacionesUsuario";
+import Review from "./pages/Review.jsx"
+
 import Search from "./pages/Search";
 
 const App = () => {
@@ -75,6 +77,7 @@ const App = () => {
           <Route path="/comments" element={<Comments />} />
           <Route path="/stats" element={<Estadistica />} />
           <Route path="/mypublic" element={<PublicacionesUsuario />} />
+          <Route path="/review" element={<Review/>} />
         </Routes>
       </BrowserRouter>
     </div>
