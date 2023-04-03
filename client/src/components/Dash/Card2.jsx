@@ -5,9 +5,9 @@ import local from "../../app/api/config.js";
 import houseError from "../../assets/houseError.svg";
 
 const Card2 = ({ id, property }) => {
-  const { pictures, city, country, price } = property;
+  const { pictures, city, country, price, soft_delete } = property;
 
-  const [isDeleted, setIsdeleted] = useState();
+  const [isDeleted, setIsdeleted] = useState(soft_delete);
 
   // const local = "https://inmovate.onrender.com";
   // const local = "http://localhost:3001";
