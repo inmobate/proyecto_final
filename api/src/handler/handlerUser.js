@@ -26,6 +26,9 @@ const { typeDb } = require("../controller/controllerType");
 const CommentDelete = require("../handler/delete/deleteCommit.js");
 const propertyDelete = require("./delete/deleteProperty.js");
 const userDelete = require("../handler/delete/deleteUser.js");
+const transporter = require("../nodemailer/nodemailer.js");
+const createReview = require("./post/postComments.js");
+//const imageinmobate = require("../nodemailer/inmobate.jpeg");
 // const {where}=require("sequelize");
 
 const allProperty = async (req, res) => {
@@ -104,7 +107,8 @@ const allProperty = async (req, res) => {
 };
 const allPropertyById = async (req, res) => {
   const { id } = req.params;
-  console.log(req.params);
+  //console.log(req.params);
+  //console.log(req.params);
   try {
     const datos = await Property.findOne({
       where: { id },
@@ -138,6 +142,7 @@ const postProperty = async (req, res) => {
     service, //
     beds, //
   } = req.body;
+  const { userId } = req.params;
   try {
     if (
       !description &&
@@ -166,15 +171,27 @@ const postProperty = async (req, res) => {
         title,
         pictures,
         beds,
-        type,
+        UserProperty: userId,
       });
 
       const services = await Service.findAll({ where: { name: service } });
       const types = await Type.findOne({ where: { name: type } });
+      const user = await User.findOne({ where: { id: userId } });
+      console.log("user", user);
+
       newproperty.addService(services);
       newproperty.setType(types);
 
-      console.log(newproperty);
+      //console.log(newproperty);
+      await transporter.sendMail({
+        from: '"Inmobate" <inmobaterealestate@gmail.com>', // sender address
+        to: user.email, // list of receivers
+        subject: `Propiedad publicada `, // Subject line
+        html: `<p> Hola, ${user.name}! <p> Te informamos que acabas de publicar una propiedad para alquilar con el nombre '${title}'. Para ver la publicación, haz clic en el siguiente enlace:</p> 
+        <p>http://localhost:3000/property/${newproperty.id}</p> 
+        <p>Recuerda que, si alguien está interesado en tu propiedad, recibirás una notificación por correo electrónico.</p>
+        `, // html body
+      });
 
       res.status(201).json(newproperty);
     }
@@ -227,7 +244,18 @@ const putProperty = async (req, res) => {
         },
       }
     );
-    console.log(updatedProperty);
+    const idprop = await Property.findOne({ where: { id: req.params.id } });
+    const user = await User.findOne({ where: { id: idprop.UserProperty } });
+    await transporter.sendMail({
+      from: '"Inmobate" <inmobaterealestate@gmail.com>', // sender address
+      to: user.email, // list of receivers
+      subject: `Propiedad Modificada `, // Subject line
+      html: `<p> Hola, ${user.name}! <p>Te informamos que la propiedad con el nombre '${idprop.title}' ha sido modificada correctamente. Para ver la publicación, haz clic en el siguiente enlace: </p> 
+      <p>http://localhost:3000/property/${idprop.id}</p> 
+      <p>Recuerda que, si alguien está interesado en tu propiedad, recibirás una notificación por correo electrónico.</p></p>
+      `, // html body
+    });
+    //console.log(updatedProperty);
     res.status(200).json(`la propiedad  fue modificada con exito`);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -237,7 +265,7 @@ const putProperty = async (req, res) => {
 const allUsers = async (req, res) => {
   const users = await getUser();
   try {
-    res.status(200).json({ usuarrios: users });
+    res.status(200).json({ usuarios: users });
   } catch (error) {
     res.status(400).json({ Error: error.menssage });
   }
@@ -256,6 +284,19 @@ const postUsers = async (req, res) => {
         id,
         // password: hash,
       });
+      await transporter.sendMail({
+        from: '"Inmobate" <inmobaterealestate@gmail.com>', // sender address
+        to: email, // list of receivers
+        subject: `Creacion de usuario`, // Subject line
+        html: `<p> Hola, ${name}! <p> Nos complace informarte que tu cuenta ha sido creada con éxito y ahora eres parte de la comunidad de Inmobate. <a href="http://localhost:3000/home">Aquí</a> podrás descubrir lugares impresionantes para alojarte. Los datos registrados son los siguientes: </p>
+        <p> Nombre: ${name} ${lastName}</p><p> Email: ${email}</p>
+        <p>Recuerda que puedes publicar tu casa para alquilar o buscar una en cualquier lugar de Argentina en cualquier momento.</p>
+        <a href="http://localhost:3000/home"><img src= "https://images-ext-1.discordapp.net/external/bdlZ0ZZfo9RBDEiTb8pRQQQhfLdMr6vlY8Pnu7hrzsk/%3Fver%3D6/https/us.123rf.com/450wm/deskcube/deskcube1311/deskcube131100055/24061099-3d-casa-rosada-con-el-swoosh.jpg?width=415&height=415https://images-ext-1.discordapp.net/external/bdlZ0ZZfo9RBDEiTb8pRQQQhfLdMr6vlY8Pnu7hrzsk/%3Fver%3D6/https/us.123rf.com/450wm/deskcube/deskcube1311/deskcube131100055/24061099-3d-casa-rosada-con-el-swoosh.jpg?width=415&height=415" alt="Aqui" width="300" height="200"></a>
+        <p>Si tienes alguna pregunta o comentario, no dudes en ponerte en contacto con nosotros. inmobaterealestate@gmail.com</p> 
+        <p>¡Gracias por ser parte de nuestra comunidad Inmobate!</p></p>
+        `, // html body
+      });
+
       res.status(201).send(newPost);
     } else {
       res.status(200).json(usuario);
@@ -267,8 +308,10 @@ const postUsers = async (req, res) => {
 
 const putUsers = async (req, res) => {
   const { name, lastName, email, password } = req.body;
-  console.log(req.body);
-  console.log("id del usuario ", req.params.id);
+  // console.log(req.body);
+  // console.log("id del usuario ", req.params.id);
+  // console.log(req.body);
+  // console.log("id del usuario ", req.params.id);
   try {
     const updatedUser = await User.update(
       {
@@ -283,7 +326,18 @@ const putUsers = async (req, res) => {
         },
       }
     );
-    res.status(200).json(`el usuaro fue modificada con exito`);
+    await transporter.sendMail({
+      from: '"Inmobate" <inmobaterealestate@gmail.com>', // sender address
+      to: email, // list of receivers
+      subject: `Usuario modificado`, // Subject line
+      html: `<p> Hola, ${name}! <p> Queremos informarte que tu cuenta ha sido modificada correctamente. 
+      Esperamos que las nuevas configuraciones se adapten mejor a tus necesidades.
+      Si tienes alguna pregunta o comentario, no dudes en ponerte en contacto con nosotros. 
+      ¡Gracias por ser parte de nuestra comunidad en Inmobate!</p>
+      </p>`,
+    });
+
+    res.status(200).json(`Usuario modificado con exito`);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -309,10 +363,33 @@ const allComments = async (req, res) => {
 };
 
 const postComments = async (req, res) => {
-  const { id_publication } = req.params;
+  const { idProperty } = req.params;
   const { content, id_user } = req.body;
   try {
-    const newComment = await newPostComment(content, id_user, id_publication);
+    const newComment = await createReview(content, id_user, idProperty);
+
+    const idprop = await Property.findOne({ where: { id: idProperty } });
+    const userprop = await User.findOne({ where: { id: idprop.UserProperty } });
+    const userid = await User.findOne({ where: { id: id_user } });
+    await transporter.sendMail({
+      from: '"Inmobate" <inmobaterealestate@gmail.com>', // sender address
+      to: userprop.email, // list of receivers
+      subject: `Comentarios en publicacion`, // Subject line
+      html: `<p> "Hola, ${userprop.name}! 
+      <p>Te informamos que tienes una nueva reseña sobre la propiedad '${idprop.title}'. El usuario ${userid.name} ha comentado lo siguiente: </p>
+      <p>'${content}'. </p>
+      <p> Para ver la publicación, haz clic en el siguiente enlace: http://localhost:3000/property/${id_publication}</p></p>
+      `, // html body
+    });
+    await transporter.sendMail({
+      from: '"Inmobate" <inmobaterealestate@gmail.com>', // sender address
+      to: userid.email, // list of receivers
+      subject: `Reseña publicada`, // Subject line
+      html: `<p> Hola, ${userid.name}! 
+      <p>¡Gracias por publicar una reseña sobre la propiedad '${idprop.title}'! Nos alegra que hayas tenido una buena experiencia.</p> 
+      Si estás interesado en ver otras propiedades, puedes visitar el siguiente enlace: http://localhost:3000/home</p></p>
+      `, // html body
+    });
     res.status(200).json(newComment);
   } catch (error) {
     res.status(400).json({ Error: error.message });
@@ -398,6 +475,7 @@ const allSale = async (req, res) => {
   const ventas = await getVentas();
   try {
     res.status(200).json(ventas);
+    res.status(200).json(ventas);
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
@@ -419,7 +497,7 @@ const allBooking = (req, res) => {
 
 const postBooking = async (req, res) => {
   const { date_of_admission, departure_date, total_price } = req.body;
-  const { id_property } = req.params;
+  const { id_property, id_usuario } = req.params;
 
   // Obtener el token de autenticación de los encabezados de autorización
   // const token = req.headers.authorization.split(" ")[1];
@@ -433,16 +511,33 @@ const postBooking = async (req, res) => {
         departure_date,
         total_price,
         id_property,
-        // user_id: usuario, // propiedad agregada para unificar el id del usuario
+        user_id: id_usuario, // propiedad agregada para unificar el id del usuario
       },
       {
         where: {
           id: req.params,
-          id: req.params,
         },
       }
     );
-    console.log(req.params);
+    // console.log(req.params);
+    // console.log(req.params);
+    const userprop = await Property.findOne({ where: { id: id_property } });
+    const userid = await User.findOne({ where: { id: id_usuario } });
+    await transporter.sendMail({
+      from: '"Inmobate" <inmobaterealestate@gmail.com>', // sender address
+      to: userid.email, // list of receivers
+      subject: `Publicacion de Reserva`, // Subject line
+      html: `<p> Hola, ${userid.name}! 
+      <p>¡Estos son los datos de tu reserva de la propiedad '${userprop.title}'! Esperammos tengas una buena experiencia.</p>
+      <p>Lugar de estadia: ${userprop.title}, ${userprop.city}, ${userprop.province}</p>
+      <p>Direccion: ${userprop.address}</p>
+      <p>Estadia:  check-in: ${date_of_admission} - check-out: ${departure_date}</p>
+      <p>Precio: ${total_price}</p>
+      
+      <p>Gracias por elegirnos</p>
+      <p> Si estás interesado en ver otras propiedades, puedes visitar el siguiente enlace: http://localhost:3000/home</p></p>
+      `, // html body
+    });
     res.status(200).json(newBooking);
   } catch (error) {
     res.status(400).json({ Error: error.message });
@@ -500,24 +595,28 @@ const getAdmin = async (req, res) => {
 };
 
 const deleteAdmin = async (req, res) => {
-  const { remove } = req.query;
-  const { id } = req.params;
-  
+  const { direction, id } = req.params;
+  const { soft_delete } = req.query;
+  console.log("query", req.query);
+  console.log("params", req.params);
   try {
-    if (remove === "User") {
-      const deleteuser = await userDelete(id);
+    if (direction === "User") {
+      const deleteuser = await userDelete(id, soft_delete);
+      console.log("user");
       res.status(200).json(deleteuser);
     }
-    if (remove === "Comments") {
-      const commentsdelete = await CommentDelete(id);
+    if (direction === "Comments") {
+      const commentsdelete = await CommentDelete(id, soft_delete);
+      console.log("comemets");
       res.status(200).json(commentsdelete);
     }
-    if (remove === "property") {
-      const deletePublic = await propertyDelete(id);
+    if (direction === "property") {
+      const deletePublic = await propertyDelete(id, soft_delete);
+      console.log("property");
       res.status(200).json(deletePublic);
     }
   } catch (error) {
-    res.status(404).json({ error: menssage });
+    res.status(404).json({ error: error.message });
   }
 };
 
