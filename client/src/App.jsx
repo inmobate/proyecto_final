@@ -25,12 +25,9 @@ import Step7 from "./pages/PropertiesForm/Step7";
 import Step8 from "./pages/PropertiesForm/Step8";
 import Step9 from "./pages/PropertiesForm/Step9";
 import PublicacionesUsuario from "./pages/PublicacionesUsuario";
-<<<<<<< HEAD
-import 'bootstrap/dist/css/bootstrap.css';
 import Review from "./pages/Review.jsx"
-=======
+
 import Search from "./pages/Search";
->>>>>>> 54b61e9f87d94b32d07ee1ce48c7860778550611
 
 const App = () => {
   const { logUser: globalUser } = useSelector((state) => state.logUser);

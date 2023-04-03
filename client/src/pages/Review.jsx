@@ -24,7 +24,7 @@ const Review = ({ onChange }) => {
         axios.post(`http://localhost:3000/comment`,{user_id:globalUser.id,rating,comment})
         setComment('');
     }
-   
+  
     return (
         <ReviewContainer onSubmit={handleSubmit}>
       

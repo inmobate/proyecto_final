@@ -24,11 +24,11 @@ const Step9 = () => {
     services, //
     images, //
   } = useSelector((state) => state.propertyToAdd);
-
+  const { logUser: globalUser } = useSelector((state) => state.logUser);
   const navigate = useNavigate();
 
   function handleSubmit(property) {
-    fetch(`https://inmovate.onrender.com/property`, {
+    fetch(`${local}/${globalUser.id}/property`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
