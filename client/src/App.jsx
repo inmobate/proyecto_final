@@ -25,13 +25,9 @@ import Step7 from "./pages/PropertiesForm/Step7";
 import Step8 from "./pages/PropertiesForm/Step8";
 import Step9 from "./pages/PropertiesForm/Step9";
 import PublicacionesUsuario from "./pages/PublicacionesUsuario";
-<<<<<<< HEAD
 import 'bootstrap/dist/css/bootstrap.css';
 import MercadoPago from "./components/MercadoPago";
-=======
 import Search from "./pages/Search";
-
->>>>>>> 3572748c6ae6faff8d47e80ea4356003b9a5ab1b
 const App = () => {
   const { logUser: globalUser } = useSelector((state) => state.logUser);
   const { user, isAuthenticated } = useAuth0();
@@ -64,11 +60,7 @@ const App = () => {
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/search/:filter" element={<Search />} />
           <Route path="/type/:filter" element={<FilterType />} />
-<<<<<<< HEAD
           <Route path="/mercadoPago" element={<MercadoPago />} />
-=======
-
->>>>>>> 3572748c6ae6faff8d47e80ea4356003b9a5ab1b
           <Route path="/filterCombine" element={<FilterCombine />} />
           <Route path="/addproperty" element={<PropertiesForm />} />
           <Route path="/addproperty/step1" element={<Step1 />} />
