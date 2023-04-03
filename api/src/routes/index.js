@@ -47,7 +47,7 @@ const router = Router();
 
 router.get("/property", allProperty); //lista
 router.get("/property/:id", allPropertyById); //lista
-router.post("/property", postProperty); // lista
+router.post("/:userId/property", postProperty); // lista
 router.put("/property/:id", putProperty); // lista
 
 router.get("/type", alltype); //lista
