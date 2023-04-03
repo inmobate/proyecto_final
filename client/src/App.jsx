@@ -26,6 +26,7 @@ import Step8 from "./pages/PropertiesForm/Step8";
 import Step9 from "./pages/PropertiesForm/Step9";
 import PublicacionesUsuario from "./pages/PublicacionesUsuario";
 import 'bootstrap/dist/css/bootstrap.css';
+import Review from "./pages/Review.jsx"
 
 const App = () => {
   const { logUser: globalUser } = useSelector((state) => state.logUser);
@@ -75,6 +76,7 @@ const App = () => {
           <Route path="/comments" element={<Comments />} />
           <Route path="/stats" element={<Estadistica />} />
           <Route path="/mypublic" element={<PublicacionesUsuario />} />
+          <Route path="/review" element={<Review/>} />
         </Routes>
       </BrowserRouter>
     </div>

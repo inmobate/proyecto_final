@@ -28,7 +28,7 @@ const Step9 = () => {
   const navigate = useNavigate();
 
   function handleSubmit(property) {
-    fetch(`http://localhost:3001/property`, {
+    fetch(`https://inmovate.onrender.com/property`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
