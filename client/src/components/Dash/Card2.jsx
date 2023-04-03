@@ -22,31 +22,39 @@ const Card2 = ({ id, property }) => {
   const onClose = async () => {
     if (isDeleted) {
       setIsdeleted(false);
-      console.log("uno");
       await deleteProp(id, false);
-      console.log("dos");
     } else {
       setIsdeleted(true);
-      console.log("tres");
       await deleteProp(id, true);
-      console.log("cuatro");
     }
   };
 
   return (
     <Container>
       {isDeleted ? (
-        <button onClick={() => onClose(id)}> ✅ </button>
+        <>
+          <button onClick={() => onClose(id)}> Restaurar </button>
+          <ImageWrapper>
+            <ImageBYC
+              src={pictures[0]}
+              alt="imagen"
+              onError={(e) => (e.target.src = `${houseError}`)}
+            />
+          </ImageWrapper>
+        </>
       ) : (
-        <button onClick={() => onClose(id)}> ❌ </button>
+        <>
+          <button onClick={() => onClose(id)}> Eliminar </button>
+          <ImageWrapper>
+            <Image
+              src={pictures[0]}
+              alt="imagen"
+              onError={(e) => (e.target.src = `${houseError}`)}
+            />
+          </ImageWrapper>
+        </>
       )}
-      <ImageWrapper>
-        <Image
-          src={pictures[0]}
-          alt="imagen"
-          onError={(e) => (e.target.src = `${houseError}`)}
-        />
-      </ImageWrapper>
+
       <Details>
         <Location>
           {city}, {country}
@@ -115,6 +123,15 @@ const Image = styled.img`
   height: 100%;
   object-fit: cover;
   border-radius: 0.5em;
+`;
+
+const ImageBYC = styled.img`
+  width: 80%;
+  height: 80%;
+  margin: 30px;
+  object-fit: cover;
+  border-radius: 0.5em;
+  filter: grayscale(100%);
 `;
 
 const Details = styled.div`
