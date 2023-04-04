@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useGetPropertiesQuery } from "../app/api/properties";
+import local from "../app/api/config";
 import Card from "./Card";
-import InfiniteScroll from "react-infinite-scroll-component";
-import local from "../app/api/config"
 
 const Infinite = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -34,11 +33,13 @@ const Infinite = () => {
     >
       <Container>
         {properties &&
-          properties.map((el) => (
-            <Link to={`/detail/${el.id}`} key={el.id}>
-              <Card key={el.id} property={el} />
-            </Link>
-          ))}
+          properties.map((el) =>
+            !el.soft_delete ? (
+              <Link to={`/detail/${el.id}`} key={el.id}>
+                <Card key={el.id} property={el} />
+              </Link>
+            ) : null
+          )}
       </Container>
     </InfiniteScroll>
   );
