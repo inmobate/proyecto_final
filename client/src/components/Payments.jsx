@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import moment from "moment";
 import axios from "axios";
+import {useSelector} from "react-redux";
+import { Link } from "react-router-dom";
 
 
 
@@ -9,8 +11,7 @@ const Payments = ({ price, id }) => {
   const [output, setOutput] = useState(
     moment().add(1, "day").format("YYYY-MM-DD")
   );
-
-
+const { logUser: globalUser } = useSelector((state) => state.logUser);
   function countDays(entery, output) {
     const unDia = 24 * 60 * 60 * 1000; // Milisegundos en un día
     const enteryms = new Date(entery).getTime(); // Convertir entery a milisegundos
@@ -18,7 +19,6 @@ const Payments = ({ price, id }) => {
     const diferenciaMs = Math.abs(outputms - enteryms); // Calcular la diferencia en milisegundos
     return Math.round(diferenciaMs / unDia);
   }
-
       const formData = {
         date_of_admission: entry,
         departure_date: output,
@@ -27,7 +27,7 @@ const Payments = ({ price, id }) => {
       const getData = async (id) => {
         try {
           const response = await axios.post(
-            `http://localhost:3001/${id}/booking`,
+            `http://localhost:3001/${globalUser.id}/${id}/booking`,
             formData
           );
           return response.data;
@@ -36,12 +36,29 @@ const Payments = ({ price, id }) => {
         }
       };
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    getData(id);
-}
 
-
+  const getPago = async (id) => {
+    const bookings = await getData(id)
+    let idBooking = bookings.id
+    try {
+      const{data} = await axios.post(
+        `http://localhost:3001/orderPago/${idBooking}`
+      );
+     return data
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+  
+    const  handleSubmit = async(e)=> {
+      e.preventDefault();
+    const pagoUrl = await getPago(id);
+    if (pagoUrl) {
+      window.location.href = pagoUrl;
+    } else {
+      console.log("Ha ocurrido un error al procesar el pago");
+    }
+    }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -69,9 +86,9 @@ const Payments = ({ price, id }) => {
         <span>Total a pagar: {countDays(entry, output) * price}</span>
       </div>
       <div>
-        <button
-          type="submit"
-        >Reservar</button>
+        <button type="submit">Reservar
+        </button>
+        <button><Link>Pagar</Link> </button>
       </div>
     </form>
   );

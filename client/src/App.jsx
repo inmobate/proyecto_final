@@ -26,7 +26,10 @@ import Step8 from "./pages/PropertiesForm/Step8";
 import Step9 from "./pages/PropertiesForm/Step9";
 import PublicacionesUsuario from "./pages/PublicacionesUsuario";
 import 'bootstrap/dist/css/bootstrap.css';
-import MercadoPago from "./components/MercadoPago";
+
+
+import Review from "./pages/Review.jsx"
+
 import Search from "./pages/Search";
 const App = () => {
   const { logUser: globalUser } = useSelector((state) => state.logUser);
@@ -60,7 +63,7 @@ const App = () => {
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/search/:filter" element={<Search />} />
           <Route path="/type/:filter" element={<FilterType />} />
-          <Route path="/mercadoPago" element={<MercadoPago />} />
+         
           <Route path="/filterCombine" element={<FilterCombine />} />
           <Route path="/addproperty" element={<PropertiesForm />} />
           <Route path="/addproperty/step1" element={<Step1 />} />
@@ -76,6 +79,7 @@ const App = () => {
           <Route path="/comments" element={<Comments />} />
           <Route path="/stats" element={<Estadistica />} />
           <Route path="/mypublic" element={<PublicacionesUsuario />} />
+          <Route path="/review" element={<Review/>} />
         </Routes>
       </BrowserRouter>
     </div>

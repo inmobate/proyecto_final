@@ -24,28 +24,29 @@ const Step9 = () => {
     services, //
     images, //
   } = useSelector((state) => state.propertyToAdd);
-
+  const { logUser: globalUser } = useSelector((state) => state.logUser);
   const navigate = useNavigate();
 
-async function handleSubmit(property) {
-  try {
-    const response = await fetch(`${local}/property`, {
+  function handleSubmit(property) {
+    fetch(`${local}/${globalUser.id}/property`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(property),
-    });
-
-    if (response.ok) {
-      alert("Creado correctamente");
-    }
-    navigate("/home");
-    window.location.reload();
-  } catch (error) {
-    alert(error.message);
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Creado correctamente");
+        }
+        navigate("/home");
+        window.location.reload(); 
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   }
-}
+
   return (
     <Container>
       <Content>
@@ -123,7 +124,7 @@ async function handleSubmit(property) {
               pictures: [images],
               type: type,
               service: services,
-              
+              room: rooms,
               beds: beds,
             })
           }

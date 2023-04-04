@@ -46,6 +46,7 @@ const UserButton = () => {
             </div>
             <hr />
             <Li>Ayuda</Li>
+            <Li><Link to="/addproperty">Mis publicaciones</Link></Li>
             <Li
               onClick={() => {
                 logout();
