@@ -40,7 +40,7 @@ const Step9 = () => {
           alert("Creado correctamente");
         }
         navigate("/home");
-        //window.location.reload();
+        window.location.reload();
       })
       .catch((error) => {
         alert(error.message);

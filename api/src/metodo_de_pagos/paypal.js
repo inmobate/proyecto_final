@@ -1,11 +1,11 @@
 const axios = require('axios');
 const { PAYPAL_API, PAYPAL_API_SECRET, PAYPAL_API_CLIENT, URL} = process.env;
-const {Booking,Property} = require ('../db')
+const {Booking} = require ('../db')
 
 
 
 const createOrden = async (req, res) => {
-  const resv = await Property.findOne({
+  const resv = await Booking.findOne({
     where: {
       id: req.params.id,
     },

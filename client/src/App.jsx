@@ -25,10 +25,12 @@ import Step7 from "./pages/PropertiesForm/Step7";
 import Step8 from "./pages/PropertiesForm/Step8";
 import Step9 from "./pages/PropertiesForm/Step9";
 import PublicacionesUsuario from "./pages/PublicacionesUsuario";
+import 'bootstrap/dist/css/bootstrap.css';
+
+
 import Review from "./pages/Review.jsx"
 
 import Search from "./pages/Search";
-
 const App = () => {
   const { logUser: globalUser } = useSelector((state) => state.logUser);
   const { user, isAuthenticated } = useAuth0();
@@ -61,7 +63,7 @@ const App = () => {
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/search/:filter" element={<Search />} />
           <Route path="/type/:filter" element={<FilterType />} />
-
+         
           <Route path="/filterCombine" element={<FilterCombine />} />
           <Route path="/addproperty" element={<PropertiesForm />} />
           <Route path="/addproperty/step1" element={<Step1 />} />

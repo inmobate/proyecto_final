@@ -54,8 +54,8 @@ Comment.belongsTo(Publication, { foreignKey: "property_id", targetKey: "id" });
 User.hasMany(Comment, { foreignKey: "user_id", sourceKey: "id" });
 Comment.belongsTo(User, { foreignKey: "user_id", targetKey: "id" });
 
-User.hasMany(Booking, { foreignKey: "autor_booId", sourceKey: "id" });
-Booking.belongsTo(User, { foreignKey: "autor_booId", targetKey: "id" });
+User.hasMany(Booking, { foreignKey: "autor_booId"});
+Booking.belongsTo(User, { foreignKey: "autor_booId"});
 
 Booking.hasOne(Property, { foreignKey: "autor_propId", sourceKey: "id" });
 Property.belongsTo(Booking, { foreignKey: "autor_propId", targetKey: "id" });

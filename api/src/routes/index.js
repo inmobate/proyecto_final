@@ -192,6 +192,18 @@ router.post("/orderPago/:id", orden);
 
 router.post("/notificacion", notification);
 
+// router.get("/pago-exitoso", function (req, res) {
+//   res.json(" Renderizar la página de pago exitoso")
+// });
+
+// router.get("/pago-fallido", function (req, res) {
+//   res.json("Renderizar la página de pago fallido")
+// });
+
+// router.get("/pago-pendiente", function (req, res) {
+//   res.json("Renderizar la página de pago pendiente")
+// });
+
 module.exports = router;
 
 //,

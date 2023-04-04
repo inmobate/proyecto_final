@@ -31,7 +31,12 @@ const orden = async (req, res) => {
           quantity: 1,
         },
       ],
-      notification_url: "https://b981-181-119-64-115.ngrok.io/notificacion",
+      notification_url: "https://4a7f-181-119-64-115.ngrok.io/notificacion",
+      back_urls: {
+        success: "https://4a7f-181-119-64-115.ngrok.io/pago-exitoso",
+        failure: "https://4a7f-181-119-64-115.ngrok.io/pago-fallido",
+        pending: "https://4a7f-181-119-64-115.ngrok.io/pago-pendiente",
+      },
     };
     const r = await mercadopago.preferences.create(preference);
     res.json(r.body.init_point);
@@ -51,10 +56,15 @@ const notification = async (req, res) => {
       }
     );
     const status = response.data.status;
-    res.status(200).json(`el estado de su pago es ${status}`);
+    if (status === "approved") {
+      res.redirect("/pago-exitoso");
+    } else if (status === "pending") {
+      res.redirect("/pago-pendiente");
+    } else {
+      res.redirect("/pago-fallido");
+    }
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
-
 module.exports = { orden, notification };
