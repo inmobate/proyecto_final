@@ -6,7 +6,14 @@ import {
   setRooms,
   setTravellers,
 } from "../../app/slices/propertyToAdd";
-import { BottomBar, Container, ContentColum, Button } from "./styles";
+import {
+  BottomBar,
+  Button,
+  ButtonAddLess,
+  Container,
+  ContentColum,
+  SpanCantidad,
+} from "./styles";
 
 const Step4 = () => {
   const { travellers, rooms, bathrooms, beds } = useSelector(
@@ -32,85 +39,85 @@ const Step4 = () => {
           <div>
             Viajeros
             <div>
-              <button
+              <ButtonAddLess
                 disabled={travellers <= 1}
                 onClick={() => {
                   dispatch(setTravellers(travellers - 1));
                 }}
               >
                 -
-              </button>
-              <span>{travellers}</span>
-              <button
+              </ButtonAddLess>
+              <SpanCantidad>{travellers}</SpanCantidad>
+              <ButtonAddLess
                 onClick={() => {
                   dispatch(setTravellers(travellers + 1));
                 }}
               >
                 +
-              </button>
+              </ButtonAddLess>
             </div>
           </div>
           <div>
             Dormitorios
             <div>
-              <button
+              <ButtonAddLess
                 disabled={rooms <= 1}
                 onClick={() => {
                   dispatch(setRooms(rooms - 1));
                 }}
               >
                 -
-              </button>
-              <span>{rooms}</span>
-              <button
+              </ButtonAddLess>
+              <SpanCantidad>{rooms}</SpanCantidad>
+              <ButtonAddLess
                 onClick={() => {
                   dispatch(setRooms(rooms + 1));
                 }}
               >
                 +
-              </button>
+              </ButtonAddLess>
             </div>
           </div>
           <div>
             Camas
             <div>
-              <button
+              <ButtonAddLess
                 disabled={beds <= 1}
                 onClick={() => {
                   dispatch(setBeds(beds - 1));
                 }}
               >
                 -
-              </button>
-              <span>{beds}</span>
-              <button
+              </ButtonAddLess>
+              <SpanCantidad>{beds}</SpanCantidad>
+              <ButtonAddLess
                 onClick={() => {
                   dispatch(setBeds(beds + 1));
                 }}
               >
                 +
-              </button>
+              </ButtonAddLess>
             </div>
           </div>
           <div>
             Baños
             <div>
-              <button
+              <ButtonAddLess
                 disabled={bathrooms <= 1}
                 onClick={() => {
                   dispatch(setBathrooms(bathrooms - 1));
                 }}
               >
                 -
-              </button>
-              <span>{bathrooms}</span>
-              <button
+              </ButtonAddLess>
+              <SpanCantidad>{bathrooms}</SpanCantidad>
+              <ButtonAddLess
                 onClick={() => {
                   dispatch(setBathrooms(bathrooms + 1));
                 }}
               >
                 +
-              </button>
+              </ButtonAddLess>
             </div>
           </div>
         </div>

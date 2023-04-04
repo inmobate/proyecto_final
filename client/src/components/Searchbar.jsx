@@ -1,8 +1,9 @@
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { HiAdjustments } from "react-icons/hi";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import FilterCombine from "../pages/FilterCombine";
 
 const Searchbar = () => {
   const [location, setLocation] = useState("");
@@ -36,7 +37,7 @@ const Searchbar = () => {
       </SearchBar>
       <ButtonFiltros /* onClick={toggleMenu} */>
         <HiAdjustments size={25} />
-        <div>Filtros</div>
+        <FilterCombine />
       </ButtonFiltros>
     </Container>
   );

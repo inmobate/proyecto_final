@@ -72,7 +72,7 @@ export const Form = styled.form`
 `;
 
 export const Button = styled.button`
-margin: 1rem;
+  margin: 1rem;
   text-align: center;
   width: 150px;
   height: 40px;
@@ -88,4 +88,15 @@ margin: 1rem;
     border-color: rgb(92, 92, 92);
     box-shadow: 0 0 15px rgb(92, 92, 92);
   }
+`;
+
+/* Button */
+export const ButtonAddLess = styled.button`
+  width: 20px;
+`;
+
+/* Span Tag */
+export const SpanCantidad = styled.span`
+  display: inline-block;
+  width: 100px;
 `;
