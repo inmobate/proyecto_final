@@ -70,56 +70,56 @@ const linksArray = [
 
 //////////////////styledcomponents//////////////
 const Container = styled.div`
+.LogoInmobate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
 
-  position: sticky;
-  padding-top: 20px;
-  .Sidebarbutton {
-    /* border: none; */
-    position:fixed;
-    top: ${variables.xxlSpacing};
-    right: -15px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s;
-    transform: ${({ isOpen }) => (isOpen ? `initial` : `rotate(180deg)`)};
-  }
+.Links {
+  display: flex;
+  align-items: center;
+  color: #333;
+  text-decoration: none;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.Links:hover {
+  background-color: #333;
+  color: #fba2e7;
+}
+
+.Linkicon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  font-size: 1.5rem;
+}
+
+.active {
+  background-color: #333;
+  color: #ff94e8;
+}
+
+@media screen and (max-width: 768px) {
   .LogoInmobate {
-    display: flex;
-    align-items: center;
-    padding-bottom: ${variables.lgSpacing};
-    .imgcotent {
-      /* h1{display:flex;
-  height:auto;
-} */
-      cursor: pointer;
-      transition: all 0.3s;
-      transition: ${({ isOpen }) => (isOpen ? `scale(0.7)` : `scale(1.5)`)};
-    }
-    h2 {
-      display: ${({ isOpen }) => (!isOpen ? `none` : `block`)};
-    }
+    margin-top: 10px;
   }
-  .LinkContainer {
-    color:#ff9de0;;
-    margin: 8px 0;
-    padding: 0 15%;
-
-  }.Links{
-    display:flex;
-    align-items:center;
-    text-decoration:none;
-    padding:calc(${variables.smSpacing}-2px) 0;
-    color:black;
-    font-size:22px;
-    .Linkicon{
-      padding:${variables.smSpacing} ${variables.mdSpacing};
-      display:flex;
-      svg{
-        font-size:30px;
-        color:black;
-      }
-    }
+  
+  .Links {
+    padding: 5px;
+    margin: 3px 0;
+    font-size: 0.8rem;
   }
+  
+  .Linkicon {
+    margin-right: 5px;
+    font-size: 1.2rem;
+  }
+}
 `;
