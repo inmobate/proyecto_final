@@ -35,7 +35,7 @@ export default function Comentarios() {
           <div class="user d-flex flex-row align-items-center">
 
             
-            <span><small class="font-weight-bold text-primary">james_olesenn</small> <small class="font-weight-bold">Hmm, This poster looks cool</small></span>
+            <span><small class="font-weight-bold text-primary">james</small> <small class="font-weight-bold">Hmm, This poster looks cool</small></span>
               
           </div>
 
