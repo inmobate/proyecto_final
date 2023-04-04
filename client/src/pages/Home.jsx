@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-import Navbar from "../components/Navbar";
+import BarFilter from "../components/BarFilter";
 import Footerbar from "../components/Footerbar";
 import Infinite from "../components/InfiniteScroll";
-import BarFilter from "../components/BarFilter";
+import Navbar from "../components/Navbar";
 
 const Home = () => {
   return (

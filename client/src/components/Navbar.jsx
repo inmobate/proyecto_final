@@ -27,7 +27,6 @@ const Navbar = () => {
           </Items>
         </Elements>
       </Nav>
-      <hr />
     </>
   );
 };
@@ -66,6 +65,5 @@ const Items = styled.div`
   align-items: center;
   gap: 1em;
 `;
-
 
 export default Navbar;

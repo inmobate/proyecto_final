@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useGetPropertiesQuery } from "../app/api/properties";
+import local from "../app/api/config";
 import Card from "./Card";
-import InfiniteScroll from "react-infinite-scroll-component";
-import local from "../app/api/config"
 
 const Infinite = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -12,9 +11,10 @@ const Infinite = () => {
   const [totalProperties, setTotalProperties] = useState(0);
 
   async function fechProp(page) {
-    await fetch(`${local}/property?page=${page}&size=18`)
+    await fetch(`${local}/propertyactive?page=${page}&size=18`)
       .then((response) => response.json())
       .then((data) => {
+        console.log("data", data.properties);
         setProperties([...properties, ...data.properties]);
         setTotalProperties(data.total);
       })

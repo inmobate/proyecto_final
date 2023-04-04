@@ -10,7 +10,7 @@ const Infinite = () => {
   const [totalProperties, setTotalProperties] = useState(0);
 
   async function fechProp(page) {
-    await fetch(`${local}/property?page=${page}&size=12`)
+    await fetch(`${local}/property?page=${page}&size=10`)
       .then((response) => response.json())
       .then((data) => {
         setProperties([...properties, ...data.properties]);

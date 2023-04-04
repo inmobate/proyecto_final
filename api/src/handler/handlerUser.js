@@ -105,6 +105,83 @@ const allProperty = async (req, res) => {
       return res.status(200).json(datos);
   }
 };
+
+const activeProperties = async (req, res) => {
+  const datos = await Property.findAll({
+    include: [
+      {
+        model: Service,
+        attributes: ["name", "icon"],
+        through: { attributes: [] },
+      },
+    ],
+  });
+  const { city, province, page, size, minPrice, maxPrice, type } = req.query;
+
+  switch (true) {
+    case type !== undefined:
+      const filterType = datos.filter((el) => {
+        return el.type === type;
+      });
+      return res.json(filterType);
+
+    case minPrice !== undefined && maxPrice !== undefined:
+      const filterPrice = datos.filter((el) => {
+        return el.price >= minPrice && el.price <= maxPrice;
+      });
+      return res.json(filter);
+
+    case page !== undefined && size !== undefined:
+      let options = {
+        where: { soft_delete: false },
+        limit: +size,
+        offset: +page * +size,
+      };
+      const { count, rows } = await Property.findAndCountAll(options);
+      return res.json({
+        total: count,
+        properties: rows,
+      });
+
+    case city !== undefined:
+      let propertyCity = await Property.findAll({
+        where: {
+          city: { [Op.iLike]: `%${city}%` },
+        },
+        include: [
+          {
+            model: Service,
+            attributes: ["name", "icon"],
+            through: { attributes: [] },
+          },
+        ],
+      });
+      return res.status(200).json(propertyCity);
+
+    case province !== undefined:
+      let propertyProvince = await Property.findAll({
+        where: {
+          province: { [Op.iLike]: province },
+        },
+        include: [
+          {
+            model: Service,
+            attributes: ["name", "icon"],
+            through: { attributes: [] },
+          },
+          {
+            model: PropertyType,
+            attributes: ["name"],
+          },
+        ],
+      });
+      return res.status(200).json(propertyProvince);
+
+    default:
+      return res.status(200).json(datos);
+  }
+};
+
 const allPropertyById = async (req, res) => {
   const { id } = req.params;
   //console.log(req.params);
@@ -646,4 +723,5 @@ module.exports = {
   deleteUser,
   getAdmin,
   deleteAdmin,
+  activeProperties,
 };

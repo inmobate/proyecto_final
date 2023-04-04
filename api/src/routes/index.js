@@ -26,6 +26,7 @@ const {
   deleteUser,
   getAdmin,
   deleteAdmin,
+  activeProperties,
 } = require("../handler/handlerUser.js");
 const {
   createOrden,
@@ -46,6 +47,7 @@ const { JWT_SECRET_KEY } = process.env;
 const router = Router();
 
 router.get("/property", allProperty); //lista
+router.get("/propertyactive", activeProperties); //lista
 router.get("/property/:id", allPropertyById); //lista
 router.post("/:userId/property", postProperty); // lista
 router.put("/property/:id", putProperty); // lista

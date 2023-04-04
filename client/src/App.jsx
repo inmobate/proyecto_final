@@ -25,15 +25,13 @@ import Step7 from "./pages/PropertiesForm/Step7";
 import Step8 from "./pages/PropertiesForm/Step8";
 import Step9 from "./pages/PropertiesForm/Step9";
 import PublicacionesUsuario from "./pages/PublicacionesUsuario";
-import 'bootstrap/dist/css/bootstrap.css';
 
-
-import Review from "./pages/Review.jsx"
+import Review from "./pages/Review.jsx";
 
 import Search from "./pages/Search";
 const App = () => {
-  const { logUser: globalUser } = useSelector((state) => state.logUser);
-  const { user, isAuthenticated } = useAuth0();
+  const { logUser: globalUser } = useSelector((state) => state.logUser); //se utiliza para obtener el valor logUser del estado global de la aplicación y asignarlo a la constante globalUser
+  const { user, isAuthenticated } = useAuth0(); //En este caso, el hook se utiliza para obtener la información del usuario autenticado y su estado de autenticación.
   const [postUser] = usePostUserMutation();
   const dispatch = useDispatch();
 
@@ -63,7 +61,7 @@ const App = () => {
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/search/:filter" element={<Search />} />
           <Route path="/type/:filter" element={<FilterType />} />
-         
+
           <Route path="/filterCombine" element={<FilterCombine />} />
           <Route path="/addproperty" element={<PropertiesForm />} />
           <Route path="/addproperty/step1" element={<Step1 />} />
@@ -79,7 +77,7 @@ const App = () => {
           <Route path="/comments" element={<Comments />} />
           <Route path="/stats" element={<Estadistica />} />
           <Route path="/mypublic" element={<PublicacionesUsuario />} />
-          <Route path="/review" element={<Review/>} />
+          <Route path="/review" element={<Review />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { BottomBar, Container, ContentColum, Button } from "./styles";
-import { uploadImage } from "./firebase";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { setImage } from "../../app/slices/propertyToAdd";
+import { uploadImage } from "./firebase";
+import { BottomBar, Button, Container, ContentColum } from "./styles";
 
 const Step6 = () => {
   const [file, setFile] = useState(null);
@@ -19,7 +19,7 @@ const Step6 = () => {
     dispatch(setImage(url));
   }
 
-  function handleDelete(){
+  function handleDelete() {
     dispatch(setImage(""));
   }
 
@@ -31,9 +31,7 @@ const Step6 = () => {
           Upload
         </Button>
         {images && <img src={images} alt="tu imagen" width={200} />}
-        <Button onClick={() => handleDelete()}>
-          X
-        </Button>
+        <Button onClick={() => handleDelete()}>X</Button>
       </ContentColum>
 
       <BottomBar>
