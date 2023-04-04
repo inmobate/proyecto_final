@@ -39,8 +39,8 @@ const Step9 = () => {
         if (response.ok) {
           alert("Creado correctamente");
         }
-        /* navigate("/home");
-        window.location.reload(); */
+        navigate("/home");
+        window.location.reload(); 
       })
       .catch((error) => {
         alert(error.message);

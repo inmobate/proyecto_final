@@ -61,14 +61,14 @@ const Detail = () => {
               />
             </Images>
           </Gallery>
-          <Payments price={data.price}/>
+          <Payments price={data.price} id ={data.id}/>
           <div>Alojamiento {data.type}.</div>
           <div>
             {data.room} dormitorios,{data.bathrooms} baños
           </div>
           <div>
             {data.Services.map((s)=>(
-              <div>
+              <div key={s.name}>
                 <p>{s.name}</p>
                 <p>{s.icon}</p>
               </div>
