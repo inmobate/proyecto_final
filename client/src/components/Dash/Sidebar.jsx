@@ -90,7 +90,7 @@ const Container = styled.div`
 
 .Links:hover {
   background-color: #333;
-  color: #ff94e8;
+  color: #fba2e7;
 }
 
 .Linkicon {
