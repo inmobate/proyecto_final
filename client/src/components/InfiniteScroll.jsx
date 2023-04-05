@@ -34,11 +34,13 @@ const Infinite = () => {
     >
       <Container>
         {properties &&
-          properties.map((el) => (
-            <Link to={`/detail/${el.id}`} key={el.id}>
-              <Card key={el.id} property={el} />
-            </Link>
-          ))}
+          properties.map((el) =>
+            !el.soft_delete ? (
+              <Link to={`/detail/${el.id}`} key={el.id}>
+                <Card key={el.id} property={el} />
+              </Link>
+            ) : null
+          )}
       </Container>
     </InfiniteScroll>
   );

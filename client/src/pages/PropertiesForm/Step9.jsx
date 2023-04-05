@@ -1,14 +1,14 @@
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import local from "../../app/api/config";
 import {
   BottomBar,
+  Button,
   Container,
   Content,
   FlexCenter,
   Type,
-  Button,
 } from "./styles";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import local from "../../app/api/config";
 const Step9 = () => {
   const {
     type, //
@@ -40,7 +40,7 @@ const Step9 = () => {
           alert("Creado correctamente");
         }
         navigate("/home");
-        window.location.reload(); 
+        window.location.reload();
       })
       .catch((error) => {
         alert(error.message);

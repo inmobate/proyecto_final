@@ -1,19 +1,19 @@
 import styled from "styled-components";
 
-import { useRef, useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Link } from "react-router-dom";
 
-import { HiOutlineUserCircle, HiMenu } from "react-icons/hi";
-import { useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
+import { HiMenu, HiOutlineUserCircle } from "react-icons/hi";
+import { useSelector } from "react-redux";
 
 const UserButton = () => {
   const refMenu = useRef(null);
   const { logUser } = useSelector((state) => state.logUser);
   const [active, setActive] = useState(false);
 
-  const { user,loginWithRedirect, logout, isAuthenticated } = useAuth0();
+  const { user, loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
@@ -46,7 +46,9 @@ const UserButton = () => {
             </div>
             <hr />
             <Li>Ayuda</Li>
-            <Li><Link to="/addproperty">Mis publicaciones</Link></Li>
+            <Li>
+              <Link to="/addproperty">Mis publicaciones</Link>
+            </Li>
             <Li
               onClick={() => {
                 logout();

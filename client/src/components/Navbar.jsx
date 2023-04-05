@@ -34,6 +34,7 @@ const Navbar = () => {
 const Nav = styled.nav`
   padding: 1em;
   background: #ffff;
+  border-bottom: 1px solid grey;
 `;
 
 const Elements = styled.div`
