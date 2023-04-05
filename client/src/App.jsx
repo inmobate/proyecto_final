@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import "bootstrap/dist/css/bootstrap.css";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { usePostUserMutation } from "./app/api/properties";
 import { setUser } from "./app/slices/logUser";
 import Comments from "./pages/Comments";
 import Detail from "./pages/Detail";
-import Search from "./pages/Search";
-import FilterType from "./pages/FilterType";
 import Estadistica from "./pages/Estadistica";
 import FilterCombine from "./pages/FilterCombine";
+import FilterType from "./pages/FilterType";
 import Home from "./pages/Home";
 import Landing from "./pages/Landing";
 import Profile from "./pages/Profile";
@@ -27,6 +27,10 @@ import Step9 from "./pages/PropertiesForm/Step9";
 import PublicacionesUsuario from "./pages/PublicacionesUsuario";
 import 'bootstrap/dist/css/bootstrap.css';
 
+
+import Review from "./pages/Review.jsx"
+
+import Search from "./pages/Search";
 const App = () => {
   const { logUser: globalUser } = useSelector((state) => state.logUser);
   const { user, isAuthenticated } = useAuth0();
@@ -59,7 +63,7 @@ const App = () => {
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/search/:filter" element={<Search />} />
           <Route path="/type/:filter" element={<FilterType />} />
-        
+         
           <Route path="/filterCombine" element={<FilterCombine />} />
           <Route path="/addproperty" element={<PropertiesForm />} />
           <Route path="/addproperty/step1" element={<Step1 />} />
@@ -75,6 +79,7 @@ const App = () => {
           <Route path="/comments" element={<Comments />} />
           <Route path="/stats" element={<Estadistica />} />
           <Route path="/mypublic" element={<PublicacionesUsuario />} />
+          <Route path="/review" element={<Review/>} />
         </Routes>
       </BrowserRouter>
     </div>
