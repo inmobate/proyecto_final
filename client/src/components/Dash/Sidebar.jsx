@@ -1,14 +1,9 @@
 import React from "react";
+import { AiFillHome, AiOutlineForm } from "react-icons/ai";
+import { ImStatsBars } from "react-icons/im";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { variables } from "../Dash/ItemSidebar";
-import {
-  AiOutlineArrowsAlt,
-  AiFillHome,
-  AiOutlineForm,
-  AiFillCalendar
-} from "react-icons/ai";
-import { ImStatsBars } from "react-icons/im";
-import {NavLink } from "react-router-dom";
 export default function Sidebar({ sidebarOpen, setsidebarOpen }) {
   // const open = () => {
   //   setsidebarOpen(!sidebarOpen);
@@ -18,21 +13,14 @@ export default function Sidebar({ sidebarOpen, setsidebarOpen }) {
       {/* <button className="Sidebarbutton" onClick={open}>
         <AiOutlineArrowsAlt />
       </button> */}
-      <div className="LogoInmobate">
-        <div className="imgcontent">
-
-        </div>
+      <div classname="LogoInmobate">
+        <div classname="imgcontent"></div>
       </div>
-      {linksArray.map(({icon, label, to}) => (
-        <div className="me-2" key ={label}>
-          <NavLink to={to} activeClassName="active" className ="Links">
-            <div className="Linkicon">
-              {icon}
-            </div>
-            {sidebarOpen &&(
-              <span>{label}</span>
-            )
-            }
+      {linksArray.map(({ icon, label, to }) => (
+        <div classname="me-2" key={label}>
+          <NavLink to={to} activeClassName="active" className="Links">
+            <div classname="Linkicon">{icon}</div>
+            {sidebarOpen && <span>{label}</span>}
           </NavLink>
         </div>
       ))}
@@ -52,35 +40,24 @@ const linksArray = [
     to: "/stats",
   },
   {
-    label: "General",
+    label: "Propiedades",
     icon: <AiOutlineForm />,
     to: "/dashboard",
   },
   {
-    label: "Mis Publicaciones",
+    label: "Usuarios",
     icon: <AiOutlineForm />,
     to: "/mypublic",
-  },
-  {
-    label: "Comentarios",
-    icon: <AiFillHome />,
-    to: "/comments",
-  },
-  {
-    label: "Publicacion",
-    icon: <AiFillHome />,
-    to: "/addproperty",
   },
 ];
 
 //////////////////styledcomponents//////////////
 const Container = styled.div`
-
   position: sticky;
   padding-top: 20px;
   .Sidebarbutton {
     /* border: none; */
-    position:fixed;
+    position: fixed;
     top: ${variables.xxlSpacing};
     right: -15px;
     width: 32px;
@@ -107,23 +84,23 @@ const Container = styled.div`
     }
   }
   .LinkContainer {
-    color:#ff9de0;;
+    color: #ff9de0;
     margin: 8px 0;
     padding: 0 15%;
-
-  }.Links{
-    display:flex;
-    align-items:center;
-    text-decoration:none;
-    padding:calc(${variables.smSpacing}-2px) 0;
-    color:black;
-    font-size:22px;
-    .Linkicon{
-      padding:${variables.smSpacing} ${variables.mdSpacing};
-      display:flex;
-      svg{
-        font-size:30px;
-        color:black;
+  }
+  .Links {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: calc(${variables.smSpacing}-2px) 0;
+    color: black;
+    font-size: 22px;
+    .Linkicon {
+      padding: ${variables.smSpacing} ${variables.mdSpacing};
+      display: flex;
+      svg {
+        font-size: 30px;
+        color: black;
       }
     }
   }

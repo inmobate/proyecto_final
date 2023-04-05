@@ -340,9 +340,9 @@ const putProperty = async (req, res) => {
 };
 
 const allUsers = async (req, res) => {
-  const users = await getUser();
   try {
-    res.status(200).json({ usuarios: users });
+    const users = await getUser();
+    res.status(200).json(users);
   } catch (error) {
     res.status(400).json({ Error: error.menssage });
   }
@@ -652,19 +652,22 @@ const allServicios = async (req, res) => {
 
 //------------------------------------------------------------------------------------------------------------------------------
 const getAdmin = async (req, res) => {
-  const { get } = req.query;
+  const { direction, id } = req.params;
+  const { soft_delete } = req.query;
+  console.log("query", req.query);
+  console.log("params", req.params);
   try {
-    if (get === "Users") {
+    if (direction === "Users") {
       const users = await getAllUser();
-      res.status(200).json({ Users: users });
+      res.status(200).json(users);
     }
-    if (get === "Comments") {
+    if (direction === "Comments") {
       const comments = await getAllComentario();
-      res.status(200).json({ comentarios: comments });
+      res.status(200).json(comments);
     }
-    if (get === "Publication") {
+    if (direction === "Publication") {
       const publicacion = await getAllPublication();
-      res.status(200).json({ publi: publicacion });
+      res.status(200).json(publicacion);
     }
   } catch (error) {
     res.status(404).json({ error: menssage });

@@ -1,20 +1,139 @@
-.comentariosbox {
-    width: 300px;
-    border-radius: 30px;
-    box-shadow: 0px 0px 20px 0px rgba(235, 14, 255, 0.762);
-    width: 380px;
-    height: 500px;
-    padding: 5%;
-    text-decoration: none;
-    margin-top: 1px;
-  }
-  .boxinterna {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: rgba(255, 85, 238, 0.701);
-    border-radius: 20px;
-    height: 240px;
-    width: 160px;
-    text-decoration: none;
-  }
+.card {
+  border: none;
+  box-shadow: 55px 60px 60px 22px #e9ecef;
+  border-radius: 4px;
+}
+
+.dots {
+  height: 4px;
+  width: 4px;
+  margin-bottom: 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.badge {
+  padding: 7px;
+  padding-right: 9px;
+  padding-left: 16px;
+  box-shadow: 5px 6px 6px 2px #e9ecef;
+}
+
+.user-img {
+  margin-top: 4px;
+}
+
+.check-icon {
+  font-size: 17px;
+  color: #c3bfbf;
+  top: 1px;
+  position: relative;
+  margin-left: 3px;
+}
+
+.form-check-input {
+  margin-top: 6px;
+  margin-left: -24px !important;
+  cursor: pointer;
+}
+
+.form-check-input:focus {
+  box-shadow: none;
+}
+
+.icons i {
+  margin-left: 8px;
+}
+.reply {
+  margin-left: 12px;
+}
+
+.reply small {
+  color: #b7b4b4;
+}
+
+.reply small:hover {
+  color: rgb(157, 14, 14);
+  cursor: pointer;
+}
+
+/* Card */
+.sc-kgKVFY div .card {
+  display: inline-block;
+  transform: translatex(0px) translatey(0px) !important;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+/* Card */
+#root div .active .sc-kgKVFY div div div .card {
+  width: 37% !important;
+}
+
+/* Small Tag */
+.sc-kgKVFY button small {
+  display: inline-block;
+  margin-left: 0px;
+  color: #ecf0f1;
+}
+
+/* Button */
+.sc-kgKVFY .card button {
+  margin-left: 0px;
+  width: 26px;
+  background-color: #ff9de0;
+  border-color: #212529;
+}
+
+/* Small Tag */
+#root div .active .sc-kgKVFY div div div .card .d-flex button small {
+  width: 83% !important;
+}
+
+/* Flex */
+.card > .d-flex {
+  text-transform: uppercase;
+  text-align: left;
+  letter-spacing: 0.9px;
+}
+
+/* Reply */
+.sc-kgKVFY div .reply {
+  padding-left: 35px !important;
+}
+
+#root div .active .sc-hAtEyd div div div .card {
+  width: 40% !important;
+  padding-right: 15px !important;
+  padding-left: 15px !important;
+}
+
+/* Card */
+.sc-hAtEyd div .card {
+  height: 100px;
+  color: #212529;
+  font-size: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
+  background-repeat: repeat;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  display: inline-block;
+  transform: translatex(0px) translatey(0px) !important;
+}
+
+/* Division */
+.sc-hAtEyd > div > div > div {
+  padding-left: 30px;
+}
+
+/* Button */
+.sc-hAtEyd div button {
+  width: 40px;
+  height: 30px;
+  color: #ffffff;
+  background-color: #ff9de0;
+}

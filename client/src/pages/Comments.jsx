@@ -1,36 +1,25 @@
-import styled from "styled-components";
-
-
-
-import Filterbar from "../components/Filterbar";
-
-
-import Footerbar from "../components/Footerbar";
-
-import Sidebar from "../components/Dash/Sidebar";
 import { useState } from "react";
-
+import styled from "styled-components";
 import Comentarios from "../components/Dash/comentarios";
 import Navbar2 from "../components/Dash/NavBar2";
+import Sidebar from "../components/Dash/Sidebar";
+import Filterbar from "../components/Filterbar";
+import Footerbar from "../components/Footerbar";
 
-
-const Comments= () => {
-   const [sidebarOpen,setsidebarOpen] =useState(true)
+const Comments = () => {
+  const [sidebarOpen, setsidebarOpen] = useState(true);
   return (
-      <Container className={sidebarOpen?"sidebarState active":"sidebarState"}>
-   
-       < Navbar2/>
+    <Container className={sidebarOpen ? "sidebarState active" : "sidebarState"}>
+      <Navbar2 />
       <Header>
-
-        <Sidebar sidebarOpen={sidebarOpen}setsidebarOpen={setsidebarOpen}/>
+        <Sidebar sidebarOpen={sidebarOpen} setsidebarOpen={setsidebarOpen} />
       </Header>
       <Main>
-        <Comentarios/>
+        <Comentarios />
         {/* <Cards /> */}
-
       </Main>
       <Footer>
-<Filterbar/>
+        <Filterbar />
         <Footerbar />
       </Footer>
     </Container>
@@ -40,15 +29,15 @@ const Comments= () => {
 const Container = styled.div`
   min-width: 100%;
   min-height: 100vh;
-  display:grid;
-  grid-template-columns:90px auto;
-  transition:all 0.6s;
-  &.active{
-    grid-template-columns :300px auto;
+  display: grid;
+  grid-template-columns: 90px auto;
+  transition: all 0.6s;
+  &.active {
+    grid-template-columns: 300px auto;
   }
-.NavBar2{
-  position:ri;
-}
+  .NavBar2 {
+    position: ri;
+  }
 `;
 
 const Header = styled.header`
@@ -61,12 +50,10 @@ const Header = styled.header`
 const Main = styled.main`
   height: 100%;
   padding: 1em;
-  
 `;
 
 const Footer = styled.footer`
   display: none;
 `;
-
 
 export default Comments;

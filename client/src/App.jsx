@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { usePostUserMutation } from "./app/api/properties";
 import { setUser } from "./app/slices/logUser";
-import Comments from "./pages/Comments";
+import Comentarios from "./components/Dash/comentarios";
+import PubliUsuario from "./components/Dash/PubliUsuario";
 import Detail from "./pages/Detail";
 import Estadistica from "./pages/Estadistica";
 import FilterCombine from "./pages/FilterCombine";
@@ -24,7 +25,6 @@ import Step6 from "./pages/PropertiesForm/Step6";
 import Step7 from "./pages/PropertiesForm/Step7";
 import Step8 from "./pages/PropertiesForm/Step8";
 import Step9 from "./pages/PropertiesForm/Step9";
-import PublicacionesUsuario from "./pages/PublicacionesUsuario";
 
 import Review from "./pages/Review.jsx";
 
@@ -74,9 +74,9 @@ const App = () => {
           <Route path="/addproperty/step8" element={<Step8 />} />
           <Route path="/addproperty/step9" element={<Step9 />} />
           <Route path="/dashboard" element={<Profile />} />
-          <Route path="/comments" element={<Comments />} />
+          <Route path="/comments" element={<Comentarios />} />
           <Route path="/stats" element={<Estadistica />} />
-          <Route path="/mypublic" element={<PublicacionesUsuario />} />
+          <Route path="/mypublic" element={<PubliUsuario />} />
           <Route path="/review" element={<Review />} />
         </Routes>
       </BrowserRouter>

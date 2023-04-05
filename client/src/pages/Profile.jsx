@@ -12,13 +12,13 @@ const Profile = () => {
   const [sidebarOpen, setsidebarOpen] = useState(true);
   return (
     <Container className={sidebarOpen ? "sidebarState active" : "sidebarState"}>
-      <Navbar2 />
       <Header>
+        <Navbar2 />
         <Sidebar sidebarOpen={sidebarOpen} setsidebarOpen={setsidebarOpen} />
       </Header>
       <Main>
         {/* <Cards /> */}
-        <Infinite2/>
+        <Infinite2 />
       </Main>
       <Footer>
         <Filterbar />
@@ -37,9 +37,6 @@ const Container = styled.div`
   &.active {
     grid-template-columns: 300px auto;
   }
-  .NavBar2 {
-    position: ri;
-  }
 `;
 
 const Header = styled.header`
@@ -51,6 +48,8 @@ const Header = styled.header`
 
 const Main = styled.main`
   height: 100%;
+  position: relative;
+  top: 45px;
   padding: 1em;
 `;
 

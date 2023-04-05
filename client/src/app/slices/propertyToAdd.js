@@ -10,7 +10,7 @@ const structure = {
     beds: 1,
     bathrooms: 1,
     services: [],
-    images: "",
+    images: [],
     title: "",
     description: "",
     price: 1000,
@@ -28,7 +28,6 @@ let storageJson = JSON.parse(
 if (typeof storageJson === "string") {
   storageJson = JSON.parse(storageJson);
 }
-
 
 export const propertyToAdd = createSlice({
   name: "propertyToAdd",

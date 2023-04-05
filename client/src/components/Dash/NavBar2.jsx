@@ -2,9 +2,6 @@ import styled from "styled-components";
 
 import { Link, useLocation } from "react-router-dom";
 
-import Searchbar from "../Searchbar";
-
-
 import house from "../../assets/house.svg";
 
 const Navbar2 = () => {
@@ -23,16 +20,15 @@ const Navbar2 = () => {
           </Link>
         </Elements>
       </Nav2>
-      <hr />
     </>
   );
 };
 
 const Nav2 = styled.nav`
-width:-70px;
+  width: -70px;
   padding: 50px;
   background: #ffff;
-  border:none;
+  border: none;
 `;
 
 const Elements = styled.div`
@@ -57,6 +53,5 @@ const Title = styled.div`
   font-family: "Righteous", cursive;
   font-size: 40px;
 `;
-
 
 export default Navbar2;
